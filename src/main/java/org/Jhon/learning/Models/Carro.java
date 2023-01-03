@@ -8,8 +8,8 @@ public class Carro {
   public static final LocalDate mesReferencia = LocalDate.of(2023,1,1);
 
   private int codFipe;
-  private String marca;
-  private String modelo;
+  private Marca marca;
+  private Modelo modelo;
   private LocalDate ano;
   private Combustivel combustivel;
   private String auth;
@@ -24,19 +24,19 @@ public class Carro {
     this.codFipe = codFipe;
   }
 
-  public String getMarca() {
+  public Marca getMarca() {
     return marca;
   }
 
-  public void setMarca(String marca) {
+  public void setMarca(Marca marca) {
     this.marca = marca;
   }
 
-  public String getModelo() {
+  public Modelo getModelo() {
     return modelo;
   }
 
-  public void setModelo(String modelo) {
+  public void setModelo(Modelo modelo) {
     this.modelo = modelo;
   }
 

@@ -7,7 +7,7 @@ public class Modelo {
     * String é o nome do modelo
     * Integer é o valor, é usado em requests
     * */
-   public static final HashMap<String, Integer> modelos = new HashMap<>();
+   public static final HashMap<Marca, String> modelos = new HashMap<>();
 
    private String name;
    private int valor;
@@ -15,7 +15,7 @@ public class Modelo {
    public Modelo(String name, Integer valor){
       this.setName(name);
       this.setValor(valor);
-      add(this);
+      //add(this);
    }
    public String getName() {
       return name;
@@ -29,12 +29,16 @@ public class Modelo {
       return valor;
    }
 
+//   public Marca getMarca(){
+//
+//   }
+
    public void setValor(int valor) {
       this.valor = valor;
    }
-   private void add(Modelo modelo){
-      modelos.put(modelo.getName(), modelo.getValor());
-   }
+//   private void add(Modelo modelo){
+//      modelos.put(modelo.getName(), modelo.getValor());
+//   }
 
 
 
