@@ -1,5 +1,7 @@
 package org.Jhon.learning.Models;
 
+import org.Jhon.learning.Models.Structure.Combustivel;
+
 import java.time.LocalDate;
 
 

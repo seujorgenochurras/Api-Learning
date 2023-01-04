@@ -1,4 +1,4 @@
-package org.Jhon.learning.Models;
+package org.Jhon.learning.Models.Structure;
 
 public enum Combustivel {
    GASOLINA,

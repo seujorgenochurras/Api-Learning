@@ -1,46 +1,33 @@
 package org.Jhon.learning.Models;
 
+import org.Jhon.learning.Models.Structure.GenericAPIRequester;
+import org.Jhon.learning.Models.Structure.IModel;
+
+import java.util.Arrays;
 import java.util.HashMap;
 
-public class Modelo {
+public class Modelo extends GenericAPIRequester<Modelo> implements IModel {
    /**
     * String é o nome do modelo
     * Integer é o valor, é usado em requests
     * */
-   public static final HashMap<Marca, String> modelos = new HashMap<>();
-
-   private String name;
-   private int valor;
+   public static final HashMap<String, Integer> modelos = new HashMap<>();
 
    public Modelo(String name, Integer valor){
       this.setName(name);
-      this.setValor(valor);
-      //add(this);
-   }
-   public String getName() {
-      return name;
+      this.setValue(valor);
+      addToList(this);
    }
 
-   public void setName(String name) {
-      this.name = name;
+   @Override
+   public void addToList(Modelo modelo){
+      modelos.putIfAbsent(modelo.getName(), modelo.getValue());
    }
-
-   public int getValor() {
-      return valor;
+   @Override
+   public void addToList(Modelo... modelosList) {
+      Arrays.stream(modelosList).forEach(marca->{
+         modelos.putIfAbsent(marca.getName(), marca.getValue());
+      });
    }
-
-//   public Marca getMarca(){
-//
-//   }
-
-   public void setValor(int valor) {
-      this.valor = valor;
-   }
-//   private void add(Modelo modelo){
-//      modelos.put(modelo.getName(), modelo.getValor());
-//   }
-
-
-
 
 }
