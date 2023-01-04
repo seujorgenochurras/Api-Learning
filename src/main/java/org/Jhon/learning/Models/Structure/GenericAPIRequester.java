@@ -4,6 +4,7 @@ public abstract class GenericAPIRequester<T extends IModel> {
      private String name;
      private int value;
 
+
    public String getName() {
       return name;
    }
@@ -16,11 +17,13 @@ public abstract class GenericAPIRequester<T extends IModel> {
    public void setValue(int value) {
       this.value = value;
    }
-
    public Class<?> getInstace(){
       return this.getClass();
    }
 
+   /**
+    * A list of all instances
+    * */
    abstract public void addToList(T t);
 
    abstract public void addToList(T ...t);

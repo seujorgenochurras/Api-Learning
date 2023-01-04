@@ -6,6 +6,7 @@ import org.Jhon.learning.Models.Structure.IModel;
 import java.util.Arrays;
 import java.util.HashMap;
 
+//Modelo de carro kkkk
 public class Modelo extends GenericAPIRequester<Modelo> implements IModel {
    /**
     * String é o nome do modelo

@@ -1,0 +1,50 @@
+ /*
+    * Params: (min, max)
+    * codigoTabelaReferencia -> value da data de referencia (1, atual 293,)
+    * codigoTipoVeiculo (1, 3) -> 1 = carro, 2 = truck, 3 = moto
+    *codigoModelo: int (1, unknown)
+    *codigoMarca: int (1, unknown)
+    *ano: date (ex:2007-3)
+    *codigoTipoCombustivel: int (1, unknown)
+    *anoModelo: date (ex:2007)
+    *modeloCodigoExterno: não sem de nada desse
+    */
+
+   /*
+    * http://veiculos.fipe.org.br/api/veiculos/ConsultarTabelaDeReferencia
+    * retorna um json de todas as datas de referencia de pesquisa
+    * request: post
+    * params : nenhum
+    */
+
+   /*
+    * https://veiculos.fipe.org.br/api/veiculos//ConsultarMarcas?
+    * Retorna um json de todas as marcas
+    * request: post (obvio)
+    * params:  codigoTabelaReferencia, codigoTipoVeiculo
+    */
+
+   /*
+    *  https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos?
+    * Retorna um json com todos os modelos
+    * request: post
+    * params: codigoMarca, codigoTabelaReferencia, codigoTipoVeiculo
+    *
+    * OPTIONAL params (normally all of those are null){
+    *codigoModelo;
+    *ano;
+    *codigoTipoCombustivel;
+    *anoModelo;
+    *modeloCodigoExterno.
+    * }
+    *
+    */
+
+   /*
+    * https://veiculos.fipe.org.br/api/veiculos//ConsultarAnoModelo?
+    * Retorna um json com todos os anos do modelo, juntamente com seu respectivo combustivel
+    * (Atenção! o combustivel é posto em seu nome, não como um atributo)
+    * request: post
+    * params: codigoTipoVeiculo, codigoTabelaReferencia, codigoModelo, codigoMarca, ano, codigoTipoCombustivel, anoModelo;
+    *
+    * */
