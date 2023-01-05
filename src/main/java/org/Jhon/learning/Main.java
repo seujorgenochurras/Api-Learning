@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.http.HttpRequest;
 import java.sql.*;
 import java.util.*;
 
@@ -31,6 +32,7 @@ public class Main {
             throw new RuntimeException("HttpResponseCode: " + connectResponse);
          }
 
+
          BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
          String response = in.readLine();
          in.close();
@@ -44,9 +46,7 @@ public class Main {
             int value = item.getAsJsonObject().get("Value").getAsInt();
             modelos.put(nome, value);
          });
-        modelos.forEach((nome, value) -> {
-           System.out.println(nome + ":" + value);
-        });
+        modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));
 
       } catch (MalformedURLException e) {
          System.out.println(e.getMessage());

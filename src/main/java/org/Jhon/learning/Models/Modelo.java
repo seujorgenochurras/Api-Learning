@@ -1,8 +1,12 @@
 package org.Jhon.learning.Models;
 
+import org.Jhon.learning.ApiTesting.Structures.RequestStructure;
+import org.Jhon.learning.ApiTesting.URLTypes;
 import org.Jhon.learning.Models.Structure.GenericAPIRequester;
 import org.Jhon.learning.Models.Structure.IModel;
+import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -31,4 +35,8 @@ public class Modelo extends GenericAPIRequester<Modelo> implements IModel {
       });
    }
 
+   @Override
+   public String getURLStructure() {
+      return URLTypes.MODELOS.value;
+   }
 }
