@@ -43,7 +43,6 @@ public final class Requester {
       if (connectResponse != 200) {
          throw new RuntimeException("HttpResponseCode: " + connectResponse);
       }
-
    }
    private String getParamsAsURL(@NotNull RequestStructure structure){
       StringBuilder urlBuilder = new StringBuilder();
@@ -70,8 +69,6 @@ public final class Requester {
          urlConnection.setRequestMethod("POST");
          urlConnection.setDoOutput(true);
          urlConnection.getOutputStream().write("codigoTipoVeiculo=1&codigoTabelaReferencia=293&codigoMarca=2".getBytes());
-
-
 
          BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
          String response = in.readLine();

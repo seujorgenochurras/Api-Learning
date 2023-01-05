@@ -1,13 +1,13 @@
 package org.Jhon.learning.ApiTesting.Structures;
 
 import org.Jhon.learning.Models.Structure.IModel;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
 import java.time.LocalDate;
 
 public interface RequestStructure extends IModel {
+
 
    @Nullable
    @Range(from = 1, to = 3) Integer getCodigoTipoVeiculo();
@@ -66,6 +66,6 @@ public interface RequestStructure extends IModel {
     *ano: date (ex:2007-3)
     *codigoTipoCombustivel: int (1, unknown)
     *anoModelo: date (ex:2007)
-    *modeloCodigoExterno: não sem de nada desse
+    *modeloCodigoExterno: não sei de nada desse
     * */
 }
