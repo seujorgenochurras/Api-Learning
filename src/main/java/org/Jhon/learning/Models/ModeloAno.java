@@ -6,22 +6,17 @@ import java.time.LocalDate;
 
 
 public class ModeloAno {
-
    private LocalDate ano;
    private Combustivel combustivel;
-
    public LocalDate getAno() {
       return ano;
    }
-
    public void setAno(LocalDate ano) {
       this.ano = ano;
    }
-
    public Combustivel getCombustivel() {
       return combustivel;
    }
-
    public void setCombustivel(Combustivel combustivel) {
       this.combustivel = combustivel;
    }

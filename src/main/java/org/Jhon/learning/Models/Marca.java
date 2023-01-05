@@ -1,5 +1,6 @@
 package org.Jhon.learning.Models;
 
+import org.Jhon.learning.ApiTesting.URLTypes;
 import org.Jhon.learning.Models.Structure.GenericAPIRequester;
 import org.Jhon.learning.Models.Structure.IModel;
 
@@ -28,4 +29,8 @@ public class Marca extends GenericAPIRequester<Marca> implements IModel {
    }
 
 
+   @Override
+   public String getURLStructure() {
+      return URLTypes.MARCAS.name();
+   }
 }
