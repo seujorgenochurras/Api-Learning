@@ -5,12 +5,13 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-public interface RequestStructure extends IModel {
+public interface RequestStructure extends IModel, Request {
 
 
    @Nullable
-   @Range(from = 1, to = 3) Integer getCodigoTipoVeiculo();
+   @Range(from = 1, to = 3) Byte getCodigoTipoVeiculo();
 
    /**
     * @return id da data da tabela
@@ -34,7 +35,10 @@ public interface RequestStructure extends IModel {
     * @return {ano} - {id_gasolina}; uma string com o ano seguido do tipo de gasolina
     * */
    @Nullable
-   default String getAno(){
+   default String getAno() throws NullPointerException{
+      if(Objects.isNull(getAnoModelo()) || Objects.isNull(getCodigoTipoCombustivel())){
+         return null;
+      }
       return getAnoModelo().getYear() + "-" + getCodigoTipoCombustivel();
    }
 

@@ -3,6 +3,7 @@ package org.Jhon.learning.ApiTesting;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.Jhon.learning.ApiTesting.Structures.Request;
 import org.Jhon.learning.ApiTesting.Structures.RequestStructure;
 import org.Jhon.learning.Models.Structure.IModel;
 import org.jetbrains.annotations.NotNull;
@@ -16,34 +17,45 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public final class Requester {
+public final class Requester<T extends Request> {
 //   public static HashSet<? extends IModel> postRequest(int value){
 //   return null;
 //   }
    private URL url;
-   private RequestStructure requestStructure;
+   private T requestStructure;
 
-   public RequestStructure getRequestStructure() {
+   public T getRequestStructure() {
       return requestStructure;
    }
 
-   public void setRequestStructure(RequestStructure requestStructure) {
+   public void setRequestStructure(T requestStructure) {
       this.requestStructure = requestStructure;
    }
 
-   private void doRequest(URLTypes requestName) throws IOException {
+   public Requester(T requestStructure){
+      setRequestStructure(requestStructure);
+   }
+   public Requester(){}
+   public JsonArray doRequest(URLTypes requestName) throws IOException {
       url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
       HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
       urlConnection.setRequestMethod(requestName.requestsType.toString());
       urlConnection.setDoOutput(true);
-      urlConnection.getOutputStream().write(getParamsAsURL(getRequestStructure()).getBytes());
+      urlConnection.getOutputStream().write(getParamsAsURL((RequestStructure) getRequestStructure()).getBytes()); //TODO ERROR HERE
 
       int connectResponse = urlConnection.getResponseCode();
       if (connectResponse != 200) {
          throw new RuntimeException("HttpResponseCode: " + connectResponse);
       }
+      BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+      String rawJson = in.readLine();
+      in.close();
+      Gson gson = new Gson();
+
+      return gson.fromJson(rawJson, JsonArray.class);
    }
+
    private String getParamsAsURL(@NotNull RequestStructure structure){
       StringBuilder urlBuilder = new StringBuilder();
       urlBuilder.append("codigoTipoVeiculo=").append(structure.getCodigoTipoVeiculo());
@@ -60,7 +72,8 @@ public final class Requester {
       }
       return urlBuilder.toString();
    }
-   public static void doSmth(){
+
+   private static void doSmth(){
       try {
 
          URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos");
@@ -93,4 +106,5 @@ public final class Requester {
          throw new RuntimeException(e);
       }
    }
+
 }

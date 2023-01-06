@@ -1,2 +1,4 @@
-package org.Jhon.learning.ApiTesting.Structures;public interface Request {
+package org.Jhon.learning.ApiTesting.Structures;
+
+public interface Request {
 }

@@ -1,2 +1,4 @@
-package org.Jhon.learning.ApiTesting.Structures;public class GenericMarcaRequest {
+package org.Jhon.learning.ApiTesting.Structures;
+
+public class GenericMarcaRequest {
 }

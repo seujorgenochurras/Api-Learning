@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.Jhon.learning.ApiTesting.ConsultarMarcas;
+import org.Jhon.learning.ApiTesting.Structures.MarcasRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,34 +22,8 @@ import java.util.*;
 public class Main {
    public static void main(String[] args) {
       try {
-
-         URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos");
-         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-         urlConnection.setRequestMethod("POST");
-         urlConnection.setDoOutput(true);
-         urlConnection.getOutputStream().write("codigoTipoVeiculo=1&codigoTabelaReferencia=293&codigoMarca=2".getBytes());
-         int connectResponse = urlConnection.getResponseCode();
-         if (connectResponse != 200) {
-            throw new RuntimeException("HttpResponseCode: " + connectResponse);
-         }
-
-
-         BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-         String response = in.readLine();
-         in.close();
-         Gson gson = new Gson();
-         HashMap<String, Integer> modelos = new HashMap<>();
-         JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
-         JsonArray jsonArray = jsonObject.getAsJsonArray("Modelos");
-
-         jsonArray.forEach((item) ->{
-            String nome = item.getAsJsonObject().get("Label").getAsString();
-            int value = item.getAsJsonObject().get("Value").getAsInt();
-            modelos.put(nome, value);
-         });
-        modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));
-
+         ConsultarMarcas.getMarcas();
+         ConsultarMarcas.mostrar();
       } catch (MalformedURLException e) {
          System.out.println(e.getMessage());
       } catch (IOException e) {
