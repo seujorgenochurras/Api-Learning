@@ -24,7 +24,6 @@ public abstract class GenericAPIRequester<T extends IModel> {
    /**
     * A list of all instances
     * */
-   abstract public void addToList(T t);
+   abstract public void addToList();
 
-   abstract public void addToList(T ...t);
 }
