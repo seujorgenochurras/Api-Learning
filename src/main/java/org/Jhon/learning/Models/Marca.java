@@ -6,10 +6,12 @@ import org.Jhon.learning.Models.Structure.IModel;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
-   public static final HashMap<String, Integer> marcas = new HashMap<>();
+   public static final Map<String, Integer> marcas = new TreeMap<>();
 //
 //   public Marca(String nome, int valor){
 //
@@ -17,20 +19,17 @@ public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
 
    @Override
-   public void addToList(Marca marca){
-      marcas.putIfAbsent(marca.getName(), marca.getValue());
+   public void addToList(){
+      marcas.putIfAbsent(this.getName(), this.getValue());
+   }
+   @Override
+   public URLTypes getURLStructure() {
+      return URLTypes.MARCAS;
    }
 
-   @Override
-   public void addToList(Marca... marcasList) {
-      Arrays.stream(marcasList).forEach( marca->{
-         marcas.putIfAbsent(marca.getName(), marca.getValue());
+   public static void mostrar(){
+      marcas.forEach( (nome, value)->{
+         System.out.println(nome + ": " + value);
       });
-   }
-
-
-   @Override
-   public String getURLStructure() {
-      return URLTypes.MARCAS.name();
    }
 }

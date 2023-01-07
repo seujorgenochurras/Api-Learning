@@ -1,5 +1,7 @@
 package org.Jhon.learning.Models.Structure;
 
+import org.Jhon.learning.ApiTesting.URLTypes;
+
 public interface IModel {
-   String getURLStructure();
+  default URLTypes getURLStructure(){return null;}
 }

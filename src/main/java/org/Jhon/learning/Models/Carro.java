@@ -13,7 +13,7 @@ public class Carro extends GenericCarStructure implements IModel {
 
 
   @Override
-  public String getURLStructure() {
-    return URLTypes.CARRO.value;
+  public URLTypes getURLStructure() {
+    return URLTypes.CARRO;
   }
 }
