@@ -1,4 +1,4 @@
-package org.Jhon.learning.ApiTesting.Structures;
+package org.Jhon.learning.ApiTesting.Structures.Request;
 
 import org.Jhon.learning.Models.Structure.IModel;
 import org.jetbrains.annotations.Nullable;
@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Range;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public interface RequestStructure extends IModel, Request {
+public interface FullRequestStructure extends IModel, Request {
 
 
    @Nullable
