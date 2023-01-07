@@ -1,4 +1,9 @@
-package org.Jhon.learning.ApiTesting.Structures;
+package org.Jhon.learning.ApiTesting.Structures.Request;
 
-public interface Request {
+import org.Jhon.learning.Models.Structure.IModel;
+
+public interface Request extends IModel {
+ StringBuilder getURL();
 }
+
+

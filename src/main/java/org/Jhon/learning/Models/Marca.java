@@ -17,20 +17,17 @@ public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
 
    @Override
-   public void addToList(Marca marca){
-      marcas.putIfAbsent(marca.getName(), marca.getValue());
+   public void addToList(){
+      marcas.putIfAbsent(this.getName(), this.getValue());
+   }
+   @Override
+   public URLTypes getURLStructure() {
+      return URLTypes.MARCAS;
    }
 
-   @Override
-   public void addToList(Marca... marcasList) {
-      Arrays.stream(marcasList).forEach( marca->{
-         marcas.putIfAbsent(marca.getName(), marca.getValue());
+   public static void mostrar(){
+      marcas.forEach( (nome, value)->{
+         System.out.println(nome + ": " + value);
       });
-   }
-
-
-   @Override
-   public String getURLStructure() {
-      return URLTypes.MARCAS.name();
    }
 }
