@@ -6,10 +6,12 @@ import org.Jhon.learning.Models.Structure.IModel;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
-   public static final HashMap<String, Integer> marcas = new HashMap<>();
+   public static final Map<String, Integer> marcas = new TreeMap<>();
 //
 //   public Marca(String nome, int valor){
 //

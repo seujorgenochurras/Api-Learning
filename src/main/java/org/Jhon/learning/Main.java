@@ -10,8 +10,8 @@ public class Main {
    public static void main(String[] args) {
       try {
          ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
-         consultarMarcas.getMarcas();
-         consultarMarcas.saveMarcas();
+         consultarMarcas.getResponse();
+         consultarMarcas.saveResponse();
          Marca.mostrar();
       } catch (MalformedURLException e) {
          System.out.println(e.getMessage());

@@ -2,6 +2,7 @@ package org.Jhon.learning.ApiTesting;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.Jhon.learning.ApiTesting.Structures.Request.Request;
 
 import java.io.BufferedReader;
