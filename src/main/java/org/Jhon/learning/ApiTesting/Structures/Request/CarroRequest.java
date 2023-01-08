@@ -1,6 +1,9 @@
 package org.Jhon.learning.ApiTesting.Structures.Request;
 
+import org.Jhon.learning.ApiTesting.URLTypes;
+import org.Jhon.learning.Models.Carro;
 import org.Jhon.learning.Models.Structure.CarTypes;
+import org.Jhon.learning.Models.Structure.IModel;
 
 
 public interface CarroRequest extends ModeloComAnoRequest {
@@ -18,5 +21,13 @@ public interface CarroRequest extends ModeloComAnoRequest {
               .append(getTipoDeConsulta())
               .append("&tipoVeiculo=")
               .append(getTipoVeiculo());
+   }
+   @Override
+   default URLTypes getURLStructure(){
+      return URLTypes.CARRO;
+   }
+   @Override
+   default Class<? extends IModel> getCorrespondentModel(){
+      return Carro.class;
    }
 }

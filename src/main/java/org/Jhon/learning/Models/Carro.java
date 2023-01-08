@@ -11,9 +11,4 @@ public class Carro extends GenericCarStructure implements IModel {
 
   public static final LocalDate mesReferencia = LocalDate.of(2023,1,1);
 
-
-  @Override
-  public URLTypes getURLStructure() {
-    return URLTypes.CARRO;
-  }
 }

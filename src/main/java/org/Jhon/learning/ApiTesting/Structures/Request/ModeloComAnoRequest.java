@@ -1,5 +1,8 @@
 package org.Jhon.learning.ApiTesting.Structures.Request;
 
+import org.Jhon.learning.ApiTesting.URLTypes;
+import org.Jhon.learning.Models.Carro;
+
 import java.time.Year;
 
 public interface ModeloComAnoRequest extends AnoModeloRequest {
@@ -20,11 +23,8 @@ public interface ModeloComAnoRequest extends AnoModeloRequest {
               .append("&codigoTipoCombustivel=")
               .append(getCodigoTipoCombustivel());
    }
-   /*
-      urlBuilder.append("&codigoModelo=").append(structure.getCodigoModelo());
-      urlBuilder.append("&codigoMarca=").append(structure.getCodigoMarca());
-      urlBuilder.append("&ano=").append(structure.getAno());
-      urlBuilder.append("&codigoTipoCombustivel=").append(structure.getCodigoTipoCombustivel());
-      urlBuilder.append("&anoModelo=").append(structure.getAnoModelo());
-      urlBuilder.append("&modeloCodigoExterno=").append(structure.getModeloCodigoExterno());*/
+   @Override
+   default URLTypes getURLStructure(){
+      return URLTypes.MODELO_ATRAVES_ANO;
+   }
 }

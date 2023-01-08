@@ -1,7 +1,7 @@
 package org.Jhon.learning;
 
-import org.Jhon.learning.ApiTesting.ConsultarMarcas;
-import org.Jhon.learning.Models.Marca;
+import org.Jhon.learning.ApiTesting.ConsultarModelos;
+import org.Jhon.learning.Models.Modelo;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -9,10 +9,19 @@ import java.net.MalformedURLException;
 public class Main {
    public static void main(String[] args) {
       try {
-         ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
-         consultarMarcas.getResponse();
-         consultarMarcas.saveResponse();
-         Marca.mostrar();
+         ConsultarModelos consultarModelos = new ConsultarModelos();
+         consultarModelos.setMarcaID(1);
+         consultarModelos.setVehicleID(1);
+         consultarModelos.setTabelaReferenciaID(293);
+         consultarModelos.getResponse();
+         consultarModelos.toModel();
+         Modelo.mostrar();
+//
+//         ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
+//         consultarMarcas.getResponse();
+//         consultarMarcas.saveResponse();
+//         Marca.mostrar();
+
       } catch (MalformedURLException e) {
          System.out.println(e.getMessage());
       } catch (IOException e) {

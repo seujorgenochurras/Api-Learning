@@ -12,19 +12,10 @@ import java.util.TreeMap;
 public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
    public static final Map<String, Integer> marcas = new TreeMap<>();
-//
-//   public Marca(String nome, int valor){
-//
-//   }
-
 
    @Override
    public void addToList(){
       marcas.putIfAbsent(this.getName(), this.getValue());
-   }
-   @Override
-   public URLTypes getURLStructure() {
-      return URLTypes.MARCAS;
    }
 
    public static void mostrar(){

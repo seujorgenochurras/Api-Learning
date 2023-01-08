@@ -13,21 +13,15 @@ public class Modelo extends GenericAPIRequester<Modelo> implements IModel {
    /**
     * String é o nome do modelo
     * Integer é o valor, é usado em requests
-    * */
+    */
    public static final Map<String, Integer> modelos = new HashMap<>();
 
-   public Modelo(String name, Integer valor){
-      this.setName(name);
-      this.setValue(valor);
-   }
-
    @Override
-   public void addToList(){
+   public void addToList() {
       modelos.putIfAbsent(this.getName(), this.getValue());
    }
 
-   @Override
-   public URLTypes getURLStructure() {
-      return URLTypes.MODELOS;
+   public static void mostrar() {
+      modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));
    }
 }
