@@ -1,11 +1,8 @@
 package org.Jhon.learning.Models;
 
-import org.Jhon.learning.ApiTesting.URLTypes;
 import org.Jhon.learning.Models.Structure.GenericAPIRequester;
 import org.Jhon.learning.Models.Structure.IModel;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 

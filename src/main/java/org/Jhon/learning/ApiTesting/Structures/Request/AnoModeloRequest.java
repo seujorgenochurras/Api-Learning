@@ -1,7 +1,6 @@
 package org.Jhon.learning.ApiTesting.Structures.Request;
 
 import org.Jhon.learning.ApiTesting.URLTypes;
-import org.Jhon.learning.Models.Carro;
 
 public interface AnoModeloRequest extends ModeloRequest {
    /**

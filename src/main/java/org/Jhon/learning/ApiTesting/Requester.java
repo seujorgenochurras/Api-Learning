@@ -1,9 +1,7 @@
 package org.Jhon.learning.ApiTesting;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import org.Jhon.learning.ApiTesting.Structures.Request.Request;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,9 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public final class Requester<T extends Request> {
-//   public static HashSet<? extends IModel> postRequest(int value){
-//   return null;
-//   }
    private URL url;
    private T requestStructure;
 

@@ -1,6 +1,5 @@
 package org.Jhon.learning.ApiTesting;
 
-import com.google.gson.JsonArray;
 import org.Jhon.learning.ApiTesting.Structures.GenericMarca;
 import org.Jhon.learning.ApiTesting.Structures.Request.MarcasRequest;
 import org.Jhon.learning.Models.Marca;
@@ -8,7 +7,6 @@ import org.Jhon.learning.Models.Structure.CarTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-import java.io.IOException;
 
 public class ConsultarMarcas extends GenericMarca<MarcasRequest> {
    public ConsultarMarcas(int vehicleID, int tabelaReferenciaID) {
