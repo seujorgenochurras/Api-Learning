@@ -2,9 +2,7 @@ package org.Jhon.learning.ApiTesting.Consultar;
 
 import com.google.gson.JsonArray;
 import org.Jhon.learning.ApiTesting.Structures.GenericModelo;
-import org.Jhon.learning.ApiTesting.Structures.Request.MarcasRequest;
 import org.Jhon.learning.ApiTesting.Structures.Request.ModeloRequest;
-import org.Jhon.learning.Main;
 import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +21,10 @@ public class ConsultarModelos extends GenericModelo<ModeloRequest> {
        Modelo modelo = new Modelo();
        modelo.setValue(value);
        modelo.setName(name);
+       modelo.setModeloID(value);
+       modelo.setVeiculoID(getVehicleID());
+       modelo.setTabelaReferencialID(getTabelaReferenciaID());
+       modelo.setMarcaID(getMarcaID());
        modelo.addToList();
     });
    }
@@ -35,7 +37,7 @@ public class ConsultarModelos extends GenericModelo<ModeloRequest> {
    public ConsultarModelos(){}
    public ConsultarModelos(Marca marca){
       setVehicleID(marca.getVeiculoID());
-      setTabelaReferenciaID(marca.getTabelaID());
+      setTabelaReferenciaID(marca.getTabelaReferencialID());
       setMarcaID(marca.getValue());
    }
 

@@ -3,7 +3,7 @@ package org.Jhon.learning.ApiTesting.Consultar;
 import com.google.gson.JsonObject;
 import org.Jhon.learning.ApiTesting.Structures.GenericVeiculoClass;
 import org.Jhon.learning.ApiTesting.Structures.Request.VeiculoRequest;
-import org.Jhon.learning.Models.Carro;
+import org.Jhon.learning.Models.Veiculo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -27,7 +27,7 @@ public class ConsultarVeiculo extends GenericVeiculoClass<VeiculoRequest> {
          String siglaCombustivel = json.get("SiglaCombustivel").getAsString();
          String dataConsulta = json.get("DataConsulta").getAsString();
 
-         Carro veiculo = new Carro();
+         Veiculo veiculo = new Veiculo();
          veiculo.setPreco(preco);
          veiculo.setAno(Year.parse(anoModelo));
          veiculo.setAuth(auth);

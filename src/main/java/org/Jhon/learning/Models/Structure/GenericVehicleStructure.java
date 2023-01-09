@@ -2,7 +2,7 @@ package org.Jhon.learning.Models.Structure;
 
 import java.time.Year;
 
-public abstract class GenericCarStructure {
+public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    private String codFipe;
    private String marca;
    private String modelo;

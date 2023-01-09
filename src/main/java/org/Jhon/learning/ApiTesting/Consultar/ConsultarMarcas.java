@@ -28,7 +28,7 @@ public class ConsultarMarcas extends GenericMarca<MarcasRequest> {
          Marca marca = new Marca();
          marca.setName(item.getAsJsonObject().get("Label").getAsString());
          marca.setValue(item.getAsJsonObject().get("Value").getAsInt());
-         marca.setTabelaID(getTabelaReferenciaID());
+         marca.setTabelaReferencialID(getTabelaReferenciaID());
          marca.setVeiculoID(getVehicleID());
          marca.addToList();
 

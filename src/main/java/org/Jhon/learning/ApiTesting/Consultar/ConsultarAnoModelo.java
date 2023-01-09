@@ -3,6 +3,7 @@ package org.Jhon.learning.ApiTesting.Consultar;
 import com.google.gson.JsonArray;
 import org.Jhon.learning.ApiTesting.Structures.GenericModeloAno;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
+import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
@@ -53,4 +54,18 @@ public class ConsultarAnoModelo extends GenericModeloAno<AnoModeloRequest> {
          }
       };
    }
+   public ConsultarAnoModelo(){}
+   public ConsultarAnoModelo(int codigoModelo, int codigoTipoVeiculo, int taberalReferencia, int codigoMarca){
+      setModeloID(codigoModelo);
+      setVehicleID(codigoTipoVeiculo);
+      setTabelaReferenciaID(taberalReferencia);
+      setMarcaID(codigoMarca);
+   }
+   public ConsultarAnoModelo(Modelo modelo){
+      setModeloID(modelo.getModeloID());
+      setMarcaID(modelo.getMarcaID());
+      setTabelaReferenciaID(modelo.getTabelaReferencialID());
+      setVehicleID(modelo.getVeiculoID());
+   }
+
 }

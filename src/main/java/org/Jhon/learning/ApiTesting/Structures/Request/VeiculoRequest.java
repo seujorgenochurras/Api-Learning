@@ -1,7 +1,7 @@
 package org.Jhon.learning.ApiTesting.Structures.Request;
 
 import org.Jhon.learning.ApiTesting.Structures.URLTypes;
-import org.Jhon.learning.Models.Carro;
+import org.Jhon.learning.Models.Veiculo;
 import org.Jhon.learning.Models.Structure.CarTypes;
 import org.Jhon.learning.Models.Structure.IModel;
 
@@ -34,6 +34,6 @@ public interface VeiculoRequest extends AnoModeloRequest {
    }
    @Override
    default Class<? extends IModel> getCorrespondentModel(){
-      return Carro.class;
+      return Veiculo.class;
    }
 }
