@@ -1,30 +1,43 @@
 package org.Jhon.learning.Models;
 
-import org.Jhon.learning.ApiTesting.URLTypes;
 import org.Jhon.learning.Models.Structure.GenericAPIRequester;
 import org.Jhon.learning.Models.Structure.IModel;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
-   public static final Map<String, Integer> marcas = new TreeMap<>();
-//
-//   public Marca(String nome, int valor){
-//
-//   }
+   public static final TreeMap<String, Integer> marcas = new TreeMap<>();
 
+   public static final ArrayList<Marca> instances = new ArrayList<>();
+
+   private int veiculoID;
+
+   private int tabelaID;
+
+   public int getTabelaID() {
+      return tabelaID;
+   }
+
+   public void setTabelaID(int tabelaID) {
+      this.tabelaID = tabelaID;
+   }
+
+   public int getVeiculoID() {
+      return veiculoID;
+   }
+
+   public void setVeiculoID(int veiculoID) {
+      this.veiculoID = veiculoID;
+   }
 
    @Override
    public void addToList(){
       marcas.putIfAbsent(this.getName(), this.getValue());
-   }
-   @Override
-   public URLTypes getURLStructure() {
-      return URLTypes.MARCAS;
+      instances.add(this); //TODO fix this
+    //  System.out.println("added : " + this.getName());
    }
 
    public static void mostrar(){

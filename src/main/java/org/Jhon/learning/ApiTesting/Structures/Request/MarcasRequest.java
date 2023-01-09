@@ -1,5 +1,8 @@
 package org.Jhon.learning.ApiTesting.Structures.Request;
 
+import org.Jhon.learning.ApiTesting.Structures.URLTypes;
+import org.Jhon.learning.Models.Marca;
+import org.Jhon.learning.Models.Structure.IModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -20,4 +23,12 @@ public interface MarcasRequest extends Request{
                        .append("&codigoTabelaReferencia=").append(getCodigoTabelaReferencia());
    }
 
+   @Override
+   default URLTypes getURLStructure(){
+      return URLTypes.MARCAS;
+   }
+   @Override
+   default Class<? extends IModel> getCorrespondentModel(){
+      return Marca.class;
+   }
 }

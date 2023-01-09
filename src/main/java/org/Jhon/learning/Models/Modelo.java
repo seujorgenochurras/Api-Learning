@@ -1,33 +1,29 @@
 package org.Jhon.learning.Models;
 
-import org.Jhon.learning.ApiTesting.URLTypes;
+import com.sun.source.tree.Tree;
 import org.Jhon.learning.Models.Structure.GenericAPIRequester;
 import org.Jhon.learning.Models.Structure.IModel;
 
-import java.sql.Array;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 //Modelo de carro kkkk
 public class Modelo extends GenericAPIRequester<Modelo> implements IModel {
    /**
     * String é o nome do modelo
     * Integer é o valor, é usado em requests
-    * */
-   public static final Map<String, Integer> modelos = new HashMap<>();
-
-   public Modelo(String name, Integer valor){
-      this.setName(name);
-      this.setValue(valor);
-   }
+    */
+   public static final List<Modelo> instances = new ArrayList<>();
+   public static final TreeMap<String, Integer> modelos = new TreeMap<>();
 
    @Override
-   public void addToList(){
+   public void addToList() {
       modelos.putIfAbsent(this.getName(), this.getValue());
+      instances.add(this); //TODO fix this
    }
 
-   @Override
-   public URLTypes getURLStructure() {
-      return URLTypes.MODELOS;
+   public static void mostrar() {
+      modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));
    }
 }
