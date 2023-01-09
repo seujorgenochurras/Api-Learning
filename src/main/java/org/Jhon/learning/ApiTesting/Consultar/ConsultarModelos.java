@@ -1,4 +1,4 @@
-package org.Jhon.learning.ApiTesting;
+package org.Jhon.learning.ApiTesting.Consultar;
 
 import com.google.gson.JsonArray;
 import org.Jhon.learning.ApiTesting.Structures.GenericModelo;
@@ -13,7 +13,7 @@ public class ConsultarModelos extends GenericModelo<ModeloRequest> {
    @Override
    public void toModel() throws IllegalStateException{
     if(Objects.isNull(response)) throw new IllegalStateException("CANNOT SAVE NULL JSON");
-         JsonArray json = (JsonArray) response.getAsJsonObject().get("Modelos");
+    JsonArray json = (JsonArray) response.getAsJsonObject().get("Modelos");
        json.getAsJsonArray().forEach(item ->{
           int value = item.getAsJsonObject().get("Value").getAsInt();
           String name = item.getAsJsonObject().get("Label").getAsString();

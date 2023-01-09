@@ -22,6 +22,10 @@ public abstract class GenericConsultarClass<T extends Request> {
     * by lopping throughout the jsonObject(-responses-) and saving each one on the corresponding super list
     * */
   abstract public void toModel();
+
+  /**
+   * Structure of the post params
+   * */
   abstract public T getStructure();
    }
 

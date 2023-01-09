@@ -3,6 +3,7 @@ package org.Jhon.learning.ApiTesting;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.Request.Request;
+import org.Jhon.learning.ApiTesting.Structures.URLTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;

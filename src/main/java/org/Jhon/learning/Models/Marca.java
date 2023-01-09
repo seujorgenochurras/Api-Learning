@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 public class Marca extends GenericAPIRequester<Marca> implements IModel {
 
-   public static final Map<String, Integer> marcas = new TreeMap<>();
+   public static final TreeMap<String, Integer> marcas = new TreeMap<>();
 
    @Override
    public void addToList(){

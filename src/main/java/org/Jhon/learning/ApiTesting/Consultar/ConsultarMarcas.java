@@ -1,4 +1,4 @@
-package org.Jhon.learning.ApiTesting;
+package org.Jhon.learning.ApiTesting.Consultar;
 
 import org.Jhon.learning.ApiTesting.Structures.GenericMarca;
 import org.Jhon.learning.ApiTesting.Structures.Request.MarcasRequest;

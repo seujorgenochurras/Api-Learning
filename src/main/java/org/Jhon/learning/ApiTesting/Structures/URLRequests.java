@@ -1,4 +1,4 @@
-package org.Jhon.learning.ApiTesting;
+package org.Jhon.learning.ApiTesting.Structures;
 
 public enum URLRequests {
    POST,
