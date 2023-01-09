@@ -1,9 +1,10 @@
 package org.Jhon.learning.ApiTesting;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.Request.Request;
+import org.Jhon.learning.ApiTesting.Structures.URLTypes;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public final class Requester<T extends Request> {
-//   public static HashSet<? extends IModel> postRequest(int value){
-//   return null;
-//   }
    private URL url;
    private T requestStructure;
 
@@ -22,7 +20,7 @@ public final class Requester<T extends Request> {
       return requestStructure;
    }
 
-   public void setRequestStructure(T requestStructure) {
+   public void setRequestStructure(@NotNull T requestStructure) {
       this.requestStructure = requestStructure;
    }
 
@@ -30,7 +28,9 @@ public final class Requester<T extends Request> {
       setRequestStructure(requestStructure);
    }
    public Requester(){}
-   public JsonArray doRequest() throws IOException {
+
+
+   public JsonElement doRequest() throws IOException {
       //URLTypes requestName = requestStructure;
       URLTypes requestName = requestStructure.getURLStructure();
       url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
@@ -49,7 +49,7 @@ public final class Requester<T extends Request> {
       in.close();
       Gson gson = new Gson();
 
-      return gson.fromJson(rawJson, JsonArray.class);
+      return gson.fromJson(rawJson, JsonElement.class);
    }
 
    private String getParamsAsURL(){

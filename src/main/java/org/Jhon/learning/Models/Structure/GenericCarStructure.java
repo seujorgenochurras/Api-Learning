@@ -1,58 +1,83 @@
 package org.Jhon.learning.Models.Structure;
 
-import org.Jhon.learning.Models.Marca;
-import org.Jhon.learning.Models.Modelo;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Year;
 
 public abstract class GenericCarStructure {
-   private int codFipe;
-   private Marca marca;
-   private Modelo modelo;
-   private LocalDate ano;
-   private Combustivel combustivel;
+   private String codFipe;
+   private String marca;
+   private String modelo;
+   private Year ano;
+   private String combustivel;
+   private String siglaCombustivel;
    private String auth;
-   private LocalDate diaConsulta;
-   private BigDecimal preco;
+   private String diaConsulta;
+   private String preco;
 
-   public int getCodFipe() {
+   private String mesReferencia;
+
+   private int tipoVeiculo;
+
+   public String getSiglaCombustivel() {
+      return siglaCombustivel;
+   }
+
+   public void setSiglaCombustivel(String siglaCombustivel) {
+      this.siglaCombustivel = siglaCombustivel;
+   }
+
+   public int getTipoVeiculo() {
+      return tipoVeiculo;
+   }
+
+   public void setTipoVeiculo(int tipoVeiculo) {
+      this.tipoVeiculo = tipoVeiculo;
+   }
+
+   public String getMesReferencia() {
+      return mesReferencia;
+   }
+
+   public void setMesReferencia(String mesReferencia) {
+      this.mesReferencia = mesReferencia;
+   }
+
+   public String getCodFipe() {
       return codFipe;
    }
 
-   public void setCodFipe(int codFipe) {
+   public void setCodFipe(String codFipe) {
       this.codFipe = codFipe;
    }
 
-   public Marca getMarca() {
+   public String getMarca() {
       return marca;
    }
 
-   public void setMarca(Marca marca) {
+   public void setMarca(String marca) {
       this.marca = marca;
    }
 
-   public Modelo getModelo() {
+   public String getModelo() {
       return modelo;
    }
 
-   public void setModelo(Modelo modelo) {
+   public void setModelo(String modelo) {
       this.modelo = modelo;
    }
 
-   public LocalDate getAno() {
+   public Year getAno() {
       return ano;
    }
 
-   public void setAno(LocalDate ano) {
+   public void setAno(Year ano) {
       this.ano = ano;
    }
 
-   public Combustivel getCombustivel() {
+   public String getCombustivel() {
       return combustivel;
    }
 
-   public void setCombustivel(Combustivel combustivel) {
+   public void setCombustivel(String combustivel) {
       this.combustivel = combustivel;
    }
 
@@ -64,19 +89,19 @@ public abstract class GenericCarStructure {
       this.auth = auth;
    }
 
-   public LocalDate getDiaConsulta() {
+   public String getDiaConsulta() {
       return diaConsulta;
    }
 
-   public void setDiaConsulta(LocalDate diaConsulta) {
+   public void setDiaConsulta(String diaConsulta) {
       this.diaConsulta = diaConsulta;
    }
 
-   public BigDecimal getPreco() {
+   public String getPreco() {
       return preco;
    }
 
-   public void setPreco(BigDecimal preco) {
+   public void setPreco(String preco) {
       this.preco = preco;
    }
 }
