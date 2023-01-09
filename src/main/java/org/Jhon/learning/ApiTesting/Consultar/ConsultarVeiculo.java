@@ -1,15 +1,12 @@
 package org.Jhon.learning.ApiTesting.Consultar;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.Jhon.learning.ApiTesting.Structures.GenericVeiculoClass;
 import org.Jhon.learning.ApiTesting.Structures.Request.VeiculoRequest;
 import org.Jhon.learning.Models.Carro;
-import org.Jhon.learning.Models.Modelo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-import java.math.BigDecimal;
 import java.time.Year;
 import java.util.Objects;
 

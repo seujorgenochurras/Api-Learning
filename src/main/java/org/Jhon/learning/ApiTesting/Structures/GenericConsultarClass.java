@@ -13,7 +13,7 @@ public abstract class GenericConsultarClass<T extends Request> {
 
    public JsonElement getResponse() throws IOException {
       requester.setRequestStructure(getStructure());
-      response = requester.doRequest();
+      response = requester.doRequest(); // todo fix this
       return requester.doRequest();
    }
 
@@ -26,6 +26,7 @@ public abstract class GenericConsultarClass<T extends Request> {
   /**
    * Structure of the post params
    * */
-  abstract public T getStructure();
+  abstract protected T getStructure();
+
    }
 

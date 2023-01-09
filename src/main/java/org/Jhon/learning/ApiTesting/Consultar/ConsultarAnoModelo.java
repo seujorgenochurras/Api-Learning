@@ -3,14 +3,10 @@ package org.Jhon.learning.ApiTesting.Consultar;
 import com.google.gson.JsonArray;
 import org.Jhon.learning.ApiTesting.Structures.GenericModeloAno;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
-import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
-import org.Jhon.learning.Models.Structure.Combustivel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.Objects;
 
 //Esse é referência a interface AnoModeloRequest

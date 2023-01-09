@@ -7,6 +7,8 @@ import org.Jhon.learning.Models.Structure.CarTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.Objects;
+
 
 public class ConsultarMarcas extends GenericMarca<MarcasRequest> {
    public ConsultarMarcas(int vehicleID, int tabelaReferenciaID) {
@@ -21,11 +23,13 @@ public class ConsultarMarcas extends GenericMarca<MarcasRequest> {
 
    @Override
    public void toModel()throws IllegalStateException {
-      if (response.isJsonNull()) throw new IllegalStateException("JSON CANNOT BE NULL");
+      if (Objects.isNull(response)) throw new IllegalStateException("JSON CANNOT BE NULL");
       response.getAsJsonArray().forEach(item -> {
          Marca marca = new Marca();
          marca.setName(item.getAsJsonObject().get("Label").getAsString());
          marca.setValue(item.getAsJsonObject().get("Value").getAsInt());
+         marca.setTabelaID(getTabelaReferenciaID());
+         marca.setVeiculoID(getVehicleID());
          marca.addToList();
 
       });

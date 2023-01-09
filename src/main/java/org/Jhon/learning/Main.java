@@ -11,10 +11,34 @@ import org.Jhon.learning.Models.ModeloAno;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 public class Main {
    public static void main(String[] args) {
-      try {
+     try {
+         ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
+         consultarMarcas.getResponse();
+         consultarMarcas.toModel();
+         Marca.instances.forEach((instance)->{
+            ConsultarModelos consultarModelos = new ConsultarModelos(instance);
+            try {
+               consultarModelos.getResponse();
+               consultarModelos.toModel();
+            } catch (IOException e) {
+               throw new RuntimeException(e);
+            }
+         });
+      Modelo.instances.forEach((instace) ->{
+         System.out.println(instace.getName() + " : " + instace.getValue());
+      });
+
+       // Marca.mostrar();
+
+//         ConsultarModelos consultarModelos = new ConsultarModelos(Marca.instances.get(1));
+//         consultarModelos.getResponse();
+//         consultarModelos.toModel();
+//         Modelo.mostrar();
+
 //         ConsultarModelos consultarModelos = new ConsultarModelos();
 //         consultarModelos.setMarcaID(1);
 //         consultarModelos.setVehicleID(1);
@@ -37,16 +61,16 @@ public class Main {
 //         consultarAnoModelo.toModel();
 //         ModeloAno.mostrar();
 
-         ConsultarVeiculo consultarVeiculo = new ConsultarVeiculo();
-         consultarVeiculo.setMarcaID(1);
-         consultarVeiculo.setModeloID(1);
-         consultarVeiculo.setVehicleID(1);
-         consultarVeiculo.setAnoModeloID("1992");
-         consultarVeiculo.setCombustivelID(1);
-         consultarVeiculo.setTabelaReferenciaID(293);
-         consultarVeiculo.getResponse();
-         consultarVeiculo.toModel();
-         Carro.mostrar();
+//         ConsultarVeiculo consultarVeiculo = new ConsultarVeiculo();
+//         consultarVeiculo.setMarcaID(1);
+//         consultarVeiculo.setModeloID(1);
+//         consultarVeiculo.setVehicleID(1);
+//         consultarVeiculo.setAnoModeloID("1992");
+//         consultarVeiculo.setCombustivelID(1);
+//         consultarVeiculo.setTabelaReferenciaID(293);
+//         consultarVeiculo.getResponse();
+//         consultarVeiculo.toModel();
+//         Carro.mostrar();
 
 
       } catch (MalformedURLException e) {

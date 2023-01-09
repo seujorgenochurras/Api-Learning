@@ -2,8 +2,6 @@ package org.Jhon.learning.ApiTesting.Structures.Request;
 
 import org.Jhon.learning.ApiTesting.Structures.URLTypes;
 
-import java.time.Year;
-
 public interface AnoModeloRequest extends ModeloRequest {
    /**
     * @return id do modelo
