@@ -6,21 +6,27 @@ import org.Jhon.learning.Models.Structure.CarTypes;
 import org.Jhon.learning.Models.Structure.IModel;
 
 
-public interface CarroRequest extends ModeloComAnoRequest {
+public interface VeiculoRequest extends AnoModeloRequest {
    default CarTypes getTipoVeiculo (){
-      return CarTypes.getByNumber(getCodigoTipoVeiculo());
+      return CarTypes.getByValue(getCodigoTipoVeiculo());
    }
    default String getTipoDeConsulta(){
       return "tradicional";
    }
+   int getCodigoTipoCombustivel();
+   String getAnoModelo();
 
    @Override
    default StringBuilder getURL() {
-      return ModeloComAnoRequest.super.getURL()
-              .append("&tipoConsulta")
+      return AnoModeloRequest.super.getURL()
+              .append("&tipoConsulta=")
               .append(getTipoDeConsulta())
               .append("&tipoVeiculo=")
-              .append(getTipoVeiculo());
+              .append(getTipoVeiculo().name())
+              .append("&anoModelo=")
+              .append(getAnoModelo())
+              .append("&codigoTipoCombustivel=")
+              .append(getCodigoTipoCombustivel());
    }
    @Override
    default URLTypes getURLStructure(){

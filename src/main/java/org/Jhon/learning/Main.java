@@ -3,6 +3,8 @@ package org.Jhon.learning;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarAnoModelo;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarMarcas;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarModelos;
+import org.Jhon.learning.ApiTesting.Consultar.ConsultarVeiculo;
+import org.Jhon.learning.Models.Carro;
 import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
@@ -20,11 +22,11 @@ public class Main {
 //         consultarModelos.getResponse();
 //         consultarModelos.toModel();
 //         Modelo.mostrar();
-
-         ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
-         consultarMarcas.getResponse();
-         consultarMarcas.toModel();
-         Marca.mostrar();
+//
+//         ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
+//         consultarMarcas.getResponse();
+//         consultarMarcas.toModel();
+//         Marca.mostrar();
 
 //         ConsultarAnoModelo consultarAnoModelo = new ConsultarAnoModelo();
 //         consultarAnoModelo.setMarcaID(2);
@@ -34,6 +36,18 @@ public class Main {
 //         consultarAnoModelo.getResponse();
 //         consultarAnoModelo.toModel();
 //         ModeloAno.mostrar();
+
+         ConsultarVeiculo consultarVeiculo = new ConsultarVeiculo();
+         consultarVeiculo.setMarcaID(1);
+         consultarVeiculo.setModeloID(1);
+         consultarVeiculo.setVehicleID(1);
+         consultarVeiculo.setAnoModeloID("1992");
+         consultarVeiculo.setCombustivelID(1);
+         consultarVeiculo.setTabelaReferenciaID(293);
+         consultarVeiculo.getResponse();
+         consultarVeiculo.toModel();
+         Carro.mostrar();
+
 
       } catch (MalformedURLException e) {
          System.out.println(e.getMessage());
