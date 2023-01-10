@@ -8,9 +8,6 @@ import java.io.IOException;
 
 public abstract class GenericConsultarClass<T extends Request> {
    protected Requester<T> requester = new Requester<>();
-   protected JsonElement response;
-
-
    public JsonElement getResponse() throws IOException {
       requester.setRequestStructure(getStructure());
       return requester.doRequest();

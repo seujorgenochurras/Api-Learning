@@ -4,7 +4,6 @@ import org.Jhon.learning.Models.Structure.GenericVehicleStructure;
 import org.Jhon.learning.Models.Structure.IModel;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class Veiculo extends GenericVehicleStructure implements IModel {

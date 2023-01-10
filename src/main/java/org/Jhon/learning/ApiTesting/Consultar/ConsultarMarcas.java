@@ -1,14 +1,11 @@
 package org.Jhon.learning.ApiTesting.Consultar;
 
-import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.GenericMarca;
 import org.Jhon.learning.ApiTesting.Structures.Request.MarcasRequest;
-import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Structure.CarTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-import java.util.Objects;
 
 
 public class ConsultarMarcas extends GenericMarca<MarcasRequest> {

@@ -1,15 +1,11 @@
 package org.Jhon.learning.ApiTesting.Consultar;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.GenericModeloAno;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
 import org.Jhon.learning.Models.Modelo;
-import org.Jhon.learning.Models.ModeloAno;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-import java.util.Objects;
 
 //Esse é referência a interface AnoModeloRequest
 public class ConsultarAnoModelo extends GenericModeloAno<AnoModeloRequest> {

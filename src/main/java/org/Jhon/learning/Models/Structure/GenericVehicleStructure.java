@@ -12,9 +12,7 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    private String auth;
    private String diaConsulta;
    private String preco;
-
    private String mesReferencia;
-
    private int tipoVeiculo;
 
    public String getSiglaCombustivel() {

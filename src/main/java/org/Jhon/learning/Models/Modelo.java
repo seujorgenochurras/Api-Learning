@@ -24,6 +24,7 @@ public class Modelo extends GenericModeloModel implements IModel {
    }
 
    public static void mostrar() {
+      System.out.println("mostrnado");
       modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));
    }
 }
