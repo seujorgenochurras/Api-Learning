@@ -13,7 +13,6 @@ public abstract class GenericConsultarClass<T extends Request> {
 
    public JsonElement getResponse() throws IOException {
       requester.setRequestStructure(getStructure());
-      response = requester.doRequest(); // todo fix this
       return requester.doRequest();
    }
 
@@ -21,7 +20,7 @@ public abstract class GenericConsultarClass<T extends Request> {
     * This should parse the responses to a model and save them,
     * by lopping throughout the jsonObject(-responses-) and saving each one on the corresponding super list
     * */
-  abstract public void toModel();
+  abstract public void toModel(JsonElement jsonElement);
 
   /**
    * Structure of the post params

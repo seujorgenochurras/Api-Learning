@@ -1,6 +1,7 @@
 package org.Jhon.learning.ApiTesting.Consultar;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.GenericModeloAno;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
 import org.Jhon.learning.Models.Modelo;
@@ -12,22 +13,6 @@ import java.util.Objects;
 
 //Esse é referência a interface AnoModeloRequest
 public class ConsultarAnoModelo extends GenericModeloAno<AnoModeloRequest> {
-
-   @Override
-   public void toModel() {
-      if(Objects.isNull(response)) throw new IllegalStateException("CANNOT SAVE NULL JSON");
-      JsonArray jsonArray = response.getAsJsonArray();
-      jsonArray.forEach(item ->{
-         String[] rawValues = item.getAsJsonObject().get("Value").getAsString().split("-");
-         //"Value":"1992-1"
-         String ano = rawValues[0];
-         int combustivel = Integer.parseInt(rawValues[1]);
-         ModeloAno modeloAno = new ModeloAno();
-         modeloAno.setName(ano);
-         modeloAno.setValue(combustivel);
-         modeloAno.addToList();
-      });
-   }
 
    @Override
    public AnoModeloRequest getStructure() {

@@ -1,5 +1,6 @@
 package org.Jhon.learning.ApiTesting.Consultar;
 
+import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.GenericMarca;
 import org.Jhon.learning.ApiTesting.Structures.Request.MarcasRequest;
 import org.Jhon.learning.Models.Marca;
@@ -19,20 +20,6 @@ public class ConsultarMarcas extends GenericMarca<MarcasRequest> {
    public ConsultarMarcas(CarTypes carType, int tabelaReferenciaID) {
       setVehicleID(carType.value);
       setTabelaReferenciaID(tabelaReferenciaID);
-   }
-
-   @Override
-   public void toModel()throws IllegalStateException {
-      if (Objects.isNull(response)) throw new IllegalStateException("JSON CANNOT BE NULL");
-      response.getAsJsonArray().forEach(item -> {
-         Marca marca = new Marca();
-         marca.setName(item.getAsJsonObject().get("Label").getAsString());
-         marca.setValue(item.getAsJsonObject().get("Value").getAsInt());
-         marca.setTabelaReferencialID(getTabelaReferenciaID());
-         marca.setVeiculoID(getVehicleID());
-         marca.addToList();
-
-      });
    }
 
    @Override
