@@ -1,33 +1,26 @@
 package org.Jhon.learning.RequestV2;
 
-import org.Jhon.learning.Models.Marca;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 public class ListUtils {
    /**
     *
     * */
-   public static ArrayList<ArrayList<?>> divideList(ArrayList<?> arrayList, int partitions) {
-
-      int numberOfElementsByPartitions = 0;
-      if (arrayList.size() % partitions != 0) {
-         System.out.println("WARNING!! CANNOT DIVIDE SIZE OF ARRAYLIST("+ arrayList.size()+") WITH THE NUMBER PROVIDED (" + partitions + ") YOU WILL HAVE A LOSS OF DATA");
+   public static List<List<?>> divideList(List<?> list, int partitions) {
+      if (list.size() % partitions != 0) {
+         System.out.println("WARNING!! LIST SIZE (" + list.size() + ") CANNOT BE EVENLY DIVIDED BY (" + partitions + ") YOU WILL HAVE A LOSS OF DATA");
       }
-      numberOfElementsByPartitions += arrayList.size() / partitions;
-      ArrayList<ArrayList<?>> finale = new ArrayList<>();
 
-      ArrayList<Object> tmp = new ArrayList<>();
-      for(int j = 0; j < partitions; j++){
-      for (int i = 0; i < numberOfElementsByPartitions; i++ ){
-        tmp.add(arrayList.get(0));
-        arrayList.remove(0);
+      List<List<?>> result = new ArrayList<>();
+      int elementsPerPartition = list.size() / partitions;
+
+      for(int i = 0; i < partitions; i++){
+         int startIndex = i * elementsPerPartition;
+         int endIndex = startIndex + elementsPerPartition;
+         result.add(new ArrayList<>(list.subList(startIndex, endIndex)));
       }
-      finale.add((ArrayList<?>) tmp.clone()); //TODO learn more about shallow and deep copies
-      tmp.clear();
-     }
-     return finale;
-
+      return result;
    }
 }
