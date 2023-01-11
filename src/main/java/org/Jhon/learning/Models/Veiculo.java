@@ -1,20 +1,18 @@
 package org.Jhon.learning.Models;
 
-import org.Jhon.learning.Models.Structure.GenericCarStructure;
+import org.Jhon.learning.Models.Structure.GenericVehicleStructure;
 import org.Jhon.learning.Models.Structure.IModel;
 
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
-public class Carro extends GenericCarStructure implements IModel {
-  public static final List<Carro> carro = new ArrayList<>();
+public class Veiculo extends GenericVehicleStructure implements IModel {
+  public static final List<Veiculo> carro = new ArrayList<>();
 
 
   public void addToList(){
-    carro.add(this);
+  if(!carro.contains(this)) carro.add(this);
+
   }
 
   public static void mostrar(){

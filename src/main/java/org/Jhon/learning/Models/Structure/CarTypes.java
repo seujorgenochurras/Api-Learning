@@ -15,7 +15,7 @@ public enum CarTypes {
     * @param value value of car
     */
    public static CarTypes getByValue(@Range(from = 1, to = 3) int value){
-      return values()[value-1];
+      return values()[value -1];
    }
 
 }

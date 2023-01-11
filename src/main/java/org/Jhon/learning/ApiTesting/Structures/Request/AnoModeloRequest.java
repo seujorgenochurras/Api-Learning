@@ -13,9 +13,10 @@ public interface AnoModeloRequest extends ModeloRequest {
       return ModeloRequest.super.getURL()
               .append("&codigoModelo=").append(getCodigoModelo());
    }
-
    @Override
    default URLTypes getURLStructure() {
       return URLTypes.MODELO_ANO;
    }
+
+
 }

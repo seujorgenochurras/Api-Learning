@@ -1,38 +1,16 @@
 package org.Jhon.learning.Models;
 
-import org.Jhon.learning.Models.Structure.GenericAPIRequester;
+import org.Jhon.learning.Models.Structure.GenericMarcaModel;
 import org.Jhon.learning.Models.Structure.IModel;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
 
-public class Marca extends GenericAPIRequester<Marca> implements IModel {
+public class Marca extends GenericMarcaModel implements IModel {
 
    public static final TreeMap<String, Integer> marcas = new TreeMap<>();
 
    public static final ArrayList<Marca> instances = new ArrayList<>();
-
-   private int veiculoID;
-
-   private int tabelaID;
-
-   public int getTabelaID() {
-      return tabelaID;
-   }
-
-   public void setTabelaID(int tabelaID) {
-      this.tabelaID = tabelaID;
-   }
-
-   public int getVeiculoID() {
-      return veiculoID;
-   }
-
-   public void setVeiculoID(int veiculoID) {
-      this.veiculoID = veiculoID;
-   }
-
    @Override
    public void addToList(){
       marcas.putIfAbsent(this.getName(), this.getValue());

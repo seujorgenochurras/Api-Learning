@@ -13,7 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public final class Requester<T extends Request> {
-   private URL url;
    private T requestStructure;
 
    public T getRequestStructure() {
@@ -31,9 +30,9 @@ public final class Requester<T extends Request> {
 
 
    public JsonElement doRequest() throws IOException {
-      //URLTypes requestName = requestStructure;
+
       URLTypes requestName = requestStructure.getURLStructure();
-      url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
+      URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
       HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
       urlConnection.setRequestMethod(requestName.requestsType.toString());
