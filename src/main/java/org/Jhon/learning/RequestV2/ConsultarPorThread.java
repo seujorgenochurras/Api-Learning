@@ -27,6 +27,12 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
    }
 
    public ConsultarPorThread(ArrayList<? extends IModel> listaDePesquisa){
+      try {
+         listaDePesquisa.get(0);
+      }catch (IndexOutOfBoundsException e){
+         System.out.println(e);
+         System.out.println("Have more threads than needed");
+      }
       switch (listaDePesquisa.get(0).getClass().getSimpleName()) {
          //todo fix this monkey code
          case "Marca" -> this.classLevel = ClassModel.MARCA;

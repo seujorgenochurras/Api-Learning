@@ -1,6 +1,5 @@
 package org.Jhon.learning.ApiTesting.Structures;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.Jhon.learning.ApiTesting.Structures.Request.VeiculoRequest;

@@ -2,12 +2,8 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import org.Jhon.learning.ApiTesting.Consultar.ConsultarMarcas;
 import org.Jhon.learning.ApiTesting.Structures.Request.ModeloRequest;
-import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 
 import java.util.Objects;
 

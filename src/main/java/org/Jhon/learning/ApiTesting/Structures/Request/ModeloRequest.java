@@ -1,11 +1,8 @@
 package org.Jhon.learning.ApiTesting.Structures.Request;
 
-import org.Jhon.learning.ApiTesting.Consultar.ConsultarModelos;
 import org.Jhon.learning.ApiTesting.Structures.URLTypes;
 import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.Structure.IModel;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 
 public interface ModeloRequest extends MarcasRequest{
    /**
