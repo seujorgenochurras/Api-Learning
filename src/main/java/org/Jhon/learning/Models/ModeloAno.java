@@ -1,5 +1,6 @@
 package org.Jhon.learning.Models;
 
+import com.google.gson.JsonElement;
 import org.Jhon.learning.Models.Structure.Combustivel;
 import org.Jhon.learning.Models.Structure.GenericModeloAnoModel;
 import org.Jhon.learning.Models.Structure.IModel;
@@ -18,8 +19,9 @@ public class ModeloAno extends GenericModeloAnoModel implements IModel {
    public static final List<ModeloAno> instances = new ArrayList<>();
    public ModeloAno(){}
    public ModeloAno(String ano, int combustivelID){
-      setName(ano);
+      setLabel(ano);
       setValue(combustivelID);
+
    }
    public Combustivel getCombustivel(){
       return Combustivel.getByValue(getValue());
@@ -27,11 +29,11 @@ public class ModeloAno extends GenericModeloAnoModel implements IModel {
 
    @Override
    public void addToList() {
-      anoModelos.putIfAbsent(this.getName(), this.getValue());
+      anoModelos.putIfAbsent(this.getLabel(), this.getValue());
       instances.add(this);
    }
    public static void mostrar() {
-     instances.forEach(item -> System.out.println(item.getName() + " : " + item.getCombustivel().name()));
+     instances.forEach(item -> System.out.println(item.getLabel() + " : " + item.getCombustivel().name()));
    }
 
 

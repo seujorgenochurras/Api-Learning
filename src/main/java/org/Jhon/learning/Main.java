@@ -7,79 +7,91 @@ import org.Jhon.learning.ApiTesting.Consultar.ConsultarVeiculo;
 import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
-import org.Jhon.learning.Models.Structure.IModel;
 import org.Jhon.learning.Models.Veiculo;
-import org.Jhon.learning.RequestV2.ConsultarPorThread;
-import org.Jhon.learning.RequestV2.ListUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
    public static void main(String[] args) {
    try {
-      //Pegando marcas
       ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
       consultarMarcas.toModel(consultarMarcas.getResponse());
 
-      //Separando Lista de todas as marcas de 23 partes iguais
-      List<List<?>> marcasLists = ListUtils.divideList(Marca.instances, 23);
+      Marca marca = Marca.instances.get(0);
+      ConsultarModelos consultarModelos = new ConsultarModelos(marca);
+      consultarModelos.toModel(consultarModelos.getResponse());
 
-      //Encontrando todos os modelos
-      ExecutorService modelosExecuter = Executors.newFixedThreadPool(marcasLists.size());
-      marcasLists.forEach(marcas ->{
-         modelosExecuter.submit(()->{
-         ConsultarPorThread<ConsultarModelos> consultarModelosPorThread = new ConsultarPorThread<>((ArrayList<Modelo>) marcas);
-         consultarModelosPorThread.start();
-         });
-      });
-      if(modelosExecuter.awaitTermination(10, TimeUnit.SECONDS)){
-      modelosExecuter.shutdown();
-      }
+      Modelo modelo = Modelo.instances.get(0);
+      ConsultarAnoModelo consultarAnoModelo = new ConsultarAnoModelo(modelo);
+      consultarAnoModelo.toModel(consultarAnoModelo.getResponse());
 
-      //Separando lista com todos os modelos em 500 partes iguais
-      List<List<?>> modelosList = ListUtils.divideList(Modelo.instances,  284);
+      ModeloAno modeloAno = ModeloAno.instances.get(0);
+      ConsultarVeiculo consultarVeiculo = new ConsultarVeiculo(modeloAno);
+      consultarVeiculo.toModel(consultarVeiculo.getResponse());
 
+      Marca.mostrar();
+      Modelo.mostrar();
+      ModeloAno.mostrar();
+      Veiculo.mostrar();
 
-      //Encontrando todos os Anos dos Modelos
-      ExecutorService anoModeloExecuter = Executors.newFixedThreadPool(modelosList.size());
-      modelosList.forEach(item ->{
-         anoModeloExecuter.submit(()->{
-         ConsultarPorThread<ConsultarAnoModelo> consultarAnoModeloPorThread = new ConsultarPorThread<>((ArrayList<ModeloAno>) item);
-         consultarAnoModeloPorThread.start();
-         });
-      });
-      if(anoModeloExecuter.awaitTermination(20, TimeUnit.SECONDS)){
-         anoModeloExecuter.shutdown();
-      }
-
-      //Separando Anos dos Modelos em 600 threads
-      List<List<?>> anoModeloList = ListUtils.divideList(ModeloAno.instances, 512);
-
-      //Encontrando todos os carros
-      ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
-      anoModeloList.forEach(anoModelo ->{
-         carroExectuer.submit(()->{
-            ConsultarPorThread<ConsultarVeiculo> consultarVeiculoPorThread = new ConsultarPorThread<>((ArrayList<? extends IModel>) anoModelo);
-            consultarVeiculoPorThread.start();
-            System.out.println(Thread.activeCount());
-
-         });
-      });
-      if(anoModeloExecuter.awaitTermination(45, TimeUnit.SECONDS)){
-         anoModeloExecuter.shutdown();
-      }
-      Veiculo.getMostExpensiveCar();
-
+//      //Pegando marcas
+//      ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
+//      consultarMarcas.toModel(consultarMarcas.getResponse());
+//
+//      //Separando Lista de todas as marcas de 23 partes iguais
+//      List<List<?>> marcasLists = ListUtils.divideList(Marca.instances, 4);
+//
+//      //Encontrando todos os modelos
+//      ExecutorService modelosExecuter = Executors.newFixedThreadPool(marcasLists.size());
+//      marcasLists.forEach(marcas ->{
+//         modelosExecuter.submit(()->{
+//         ConsultarPorThread<ConsultarModelos> consultarModelosPorThread = new ConsultarPorThread<>((ArrayList<Modelo>) marcas);
+//         consultarModelosPorThread.start();
+//         });
+//      });
+//      if(modelosExecuter.awaitTermination(10, TimeUnit.SECONDS)){
+//      modelosExecuter.shutdown();
+//      }
+//
+//      //Separando lista com todos os modelos em 500 partes iguais
+//      List<List<?>> modelosList = ListUtils.divideList(Modelo.instances,  139);
+//
+//
+//      //Encontrando todos os Anos dos Modelos
+//      ExecutorService anoModeloExecuter = Executors.newFixedThreadPool(modelosList.size());
+//      modelosList.forEach(item ->{
+//         anoModeloExecuter.submit(()->{
+//         ConsultarPorThread<ConsultarAnoModelo> consultarAnoModeloPorThread = new ConsultarPorThread<>((ArrayList<ModeloAno>) item);
+//         consultarAnoModeloPorThread.start();
+//         });
+//      });
+//      if(anoModeloExecuter.awaitTermination(30, TimeUnit.SECONDS)){
+//         anoModeloExecuter.shutdown();
+//      }
+//
+//      //Separando Anos dos Modelos em 600 threads
+//      List<List<?>> anoModeloList = ListUtils.divideList(ModeloAno.instances,600  );
+//
+//      //Encontrando todos os carros
+//      ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
+//      anoModeloList.forEach(anoModelo ->{
+//         carroExectuer.submit(()->{
+//            ConsultarPorThread<ConsultarVeiculo> consultarVeiculoPorThread = new ConsultarPorThread<>((ArrayList<? extends IModel>) anoModelo);
+//            consultarVeiculoPorThread.start();
+//         });
+//      });
+//      if(anoModeloExecuter.awaitTermination(50, TimeUnit.SECONDS)){
+//         anoModeloExecuter.shutdown();
+//      }
+//      Veiculo.getMostExpensiveCar(Veiculo.carro);
+//      Veiculo.getLeastExpensiveCar(Veiculo.carro);
+//      Veiculo.getMostExpensiveCar(Veiculo.get2023Cars());
+//      Veiculo.getLeastExpensiveCar(Veiculo.get2023Cars());
 
    } catch (MalformedURLException e) {
       System.out.println(e.getMessage());
-   } catch (IOException | InterruptedException e) {
+   } catch (IOException e) {
       throw new RuntimeException(e);
    }
    }

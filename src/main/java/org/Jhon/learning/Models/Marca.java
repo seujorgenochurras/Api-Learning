@@ -13,7 +13,7 @@ public class Marca extends GenericMarcaModel implements IModel {
    public static final ArrayList<Marca> instances = new ArrayList<>();
    @Override
    public void addToList(){
-      marcas.putIfAbsent(this.getName(), this.getValue());
+      marcas.putIfAbsent(this.getLabel(), this.getValue());
       instances.add(this); //TODO fix this
     //  System.out.println("added : " + this.getName());
    }

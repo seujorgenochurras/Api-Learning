@@ -17,7 +17,7 @@ public class Modelo extends GenericModeloModel implements IModel {
 
    @Override
    public void addToList() {
-      modelos.putIfAbsent(this.getName(), this.getValue());
+      modelos.putIfAbsent(this.getLabel(), this.getValue());
       instances.add(this); //TODO fix this
    }
 

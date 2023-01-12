@@ -37,7 +37,7 @@ public final class Requester<T extends Request> {
 
       urlConnection.setRequestMethod(requestName.requestsType.toString());
       urlConnection.setDoOutput(true);
-      urlConnection.getOutputStream().write(getParamsAsURL().getBytes()); //TODO ERROR HERE
+      urlConnection.getOutputStream().write(getParamsAsURL().getBytes());
 
       int connectResponse = urlConnection.getResponseCode();
       if (connectResponse != 200) {
@@ -50,6 +50,7 @@ public final class Requester<T extends Request> {
 
       return gson.fromJson(rawJson, JsonElement.class);
    }
+
 
    private String getParamsAsURL(){
       return requestStructure.getURL().toString();

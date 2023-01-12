@@ -44,7 +44,7 @@ public class ConsultarVeiculo extends GenericVeiculoClass<VeiculoRequest> {
    }
    public ConsultarVeiculo(){};
    public ConsultarVeiculo(ModeloAno modeloAno){
-      setAnoModeloID(modeloAno.getName());
+      setAnoModeloID(modeloAno.getLabel());
       setCombustivelID(modeloAno.getValue());
       setTabelaReferenciaID(modeloAno.getTabelaReferencialID());
       setModeloID(modeloAno.getModeloID());
