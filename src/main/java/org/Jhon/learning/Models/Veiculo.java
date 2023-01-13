@@ -19,8 +19,6 @@ public class Veiculo extends GenericVehicleStructure implements IModel {
   }
 
   /**
-   *
-   *
    * @return A {@code double}, price of the vehicle
    * @see GenericVehicleStructure#getValor()
    */

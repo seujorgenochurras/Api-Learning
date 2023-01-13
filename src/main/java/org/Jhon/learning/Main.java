@@ -13,10 +13,7 @@ import org.Jhon.learning.RequestV2.ConsultarPorThread;
 import org.Jhon.learning.RequestV2.ListUtils;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -32,29 +29,29 @@ public class Main {
       consultarMarcas.toModel(consultarMarcas.getResponse());
 
       //Separando Lista de todas as marcas de 23 partes iguais
-      List<List<?>> marcasLists = ListUtils.divideList(Marca.instances, 16);
+      List<List<Marca>> marcasLists = ListUtils.divideList(Marca.instances, 16);
 
       //Encontrando todos os modelos
       ExecutorService modelosExecuter = Executors.newFixedThreadPool(marcasLists.size());
       marcasLists.forEach(marcas ->{
          modelosExecuter.submit(()->{
-         ConsultarPorThread<ConsultarModelos> consultarModelosPorThread = new ConsultarPorThread<>((ArrayList<Modelo>) marcas);
+         ConsultarPorThread<ConsultarModelos> consultarModelosPorThread = new ConsultarPorThread<>(marcas);
          consultarModelosPorThread.start();
          });
       });
-      if(modelosExecuter.awaitTermination(20, TimeUnit.SECONDS)){
+      if(modelosExecuter.awaitTermination(10, TimeUnit.SECONDS)){
       modelosExecuter.shutdown();
       }
 
       //Separando lista com todos os modelos em 500 partes iguais
-      List<List<?>> modelosList = ListUtils.divideList(Modelo.instances,  139);
+      List<List<Modelo>> modelosList = ListUtils.divideList(Modelo.instances,  139);
 
 
       //Encontrando todos os Anos dos Modelos
       ExecutorService anoModeloExecuter = Executors.newFixedThreadPool(modelosList.size());
       modelosList.forEach(item ->{
          anoModeloExecuter.submit(()->{
-         ConsultarPorThread<ConsultarAnoModelo> consultarAnoModeloPorThread = new ConsultarPorThread<>((ArrayList<ModeloAno>) item);
+         ConsultarPorThread<ConsultarAnoModelo> consultarAnoModeloPorThread = new ConsultarPorThread<>(item);
          consultarAnoModeloPorThread.start();
          });
       });
@@ -63,17 +60,17 @@ public class Main {
       }
 
       //Separando Anos dos Modelos em 600 threads
-      List<List<?>> anoModeloList = ListUtils.divideList(ModeloAno.instances,650);
+      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,650);
 
       //Encontrando todos os carros
       ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
       anoModeloList.forEach(anoModelo ->{
          carroExectuer.submit(()->{
-            ConsultarPorThread<ConsultarVeiculo> consultarVeiculoPorThread = new ConsultarPorThread<>((ArrayList<? extends IModel>) anoModelo);
+            ConsultarPorThread<ConsultarVeiculo> consultarVeiculoPorThread = new ConsultarPorThread<>(anoModelo);
             consultarVeiculoPorThread.start();
          });
       });
-      if(anoModeloExecuter.awaitTermination(90, TimeUnit.SECONDS)){
+      if(anoModeloExecuter.awaitTermination(67, TimeUnit.SECONDS)){
          anoModeloExecuter.shutdown();
       }
       Veiculo.getMostExpensiveCar(Veiculo.carro);

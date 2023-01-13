@@ -4,11 +4,13 @@ import org.Jhon.learning.ApiTesting.Consultar.ConsultarAnoModelo;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarModelos;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarVeiculo;
 import org.Jhon.learning.ApiTesting.Structures.GenericConsultarClass;
+import org.Jhon.learning.Models.ModeloAno;
 import org.Jhon.learning.Models.Structure.IModel;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thread {
@@ -16,17 +18,17 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
    /**
     * list that it will iterate and get its models
     * */
-   private ArrayList<? extends IModel> iterationList = new ArrayList<>();
+   private List<? extends IModel> iterationList = new ArrayList<>();
    private ClassModel classLevel;
-   public ArrayList<? extends IModel> getIterationList() {
+   public List<? extends IModel> getIterationList() {
       return iterationList;
    }
 
-   public void setIterationList(ArrayList<? extends IModel> iterationList) {
+   public  <H extends IModel> void setIterationList(List<H> iterationList) {
       this.iterationList = iterationList;
    }
 
-   public ConsultarPorThread(ArrayList<? extends IModel> listaDePesquisa){
+   public <H extends IModel>ConsultarPorThread(List<H> listaDePesquisa){
       try {
          listaDePesquisa.get(0);
       }catch (IndexOutOfBoundsException e){
