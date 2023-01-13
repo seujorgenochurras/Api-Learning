@@ -127,6 +127,9 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
       this.dataConsulta = dataConsulta;
    }
 
+   /**
+    * @return Raw price of the vehicle, containing monetary symbol
+    * */
    public String getValor() {
       return valor;
    }

@@ -3,10 +3,12 @@ package org.Jhon.learning.Models;
 import org.Jhon.learning.Models.Structure.GenericVehicleStructure;
 import org.Jhon.learning.Models.Structure.IModel;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Veiculo extends GenericVehicleStructure implements IModel {
   public static final List<Veiculo> carro = new ArrayList<>();
 
@@ -14,6 +16,29 @@ public class Veiculo extends GenericVehicleStructure implements IModel {
   public void addToList(){
    carro.add(this);
 
+  }
+
+  /**
+   *
+   *
+   * @return A {@code double}, price of the vehicle
+   * @see GenericVehicleStructure#getValor()
+   */
+  public BigDecimal getNumberPrice() {
+
+    //Removing the monetary symbol from the valor
+    String onlyNumberPrice = getValor().replace("R$ ", "");
+
+    //Properly parsing price to number format
+    DecimalFormat format = new DecimalFormat("#,##0.00");
+    format.setParseBigDecimal(true);
+
+    try {
+      return (BigDecimal) format.parse(onlyNumberPrice);
+    }catch (ParseException e){
+      System.err.println("Error while trying to parse a price"+ e);
+    return null;
+    }
   }
 
   public static void mostrar(){
@@ -35,15 +60,11 @@ public class Veiculo extends GenericVehicleStructure implements IModel {
 
   public static void getMostExpensiveCar(List<Veiculo> veiculosList){
     Veiculo mostExpensiveCar = null;
-    int highestPrice = 0;
+    long highestPrice = 0;
     for(Veiculo carro1 : veiculosList){
-      if(carro1.getValor().length() > highestPrice){
-        highestPrice = carro1.getValor().length();
+      if(carro1.getNumberPrice().longValue() > highestPrice){
+        highestPrice = carro1.getNumberPrice().longValue();
         mostExpensiveCar = carro1;
-      } else if(carro1.getValor().length() == highestPrice){
-        if ((Integer.parseInt(String.valueOf(carro1.getValor().charAt(3)))) > Integer.parseInt(String.valueOf(mostExpensiveCar.getValor().charAt(3)))){
-          mostExpensiveCar = carro1;
-        }
       }
     }
     System.out.println(mostExpensiveCar.getValor());
@@ -60,16 +81,11 @@ public class Veiculo extends GenericVehicleStructure implements IModel {
     System.out.println("*****FIM DO VEICULO*****\n");
   } public static void getLeastExpensiveCar(List<Veiculo> veiculosList){
     Veiculo mostExpensiveCar = veiculosList.get(0);
-
-    int highestPrice = veiculosList.get(0).getValor().length();
+    long highestPrice = veiculosList.get(0).getNumberPrice().longValue();
     for(Veiculo carro1 : veiculosList){
-      if(carro1.getValor().length() < highestPrice){
-        highestPrice = carro1.getValor().length();
+      if(carro1.getNumberPrice().longValue() < highestPrice){
+        highestPrice = carro1.getNumberPrice().longValue();
         mostExpensiveCar = carro1;
-      } else if(carro1.getValor().length() == highestPrice){
-        if ((Integer.parseInt(String.valueOf(carro1.getValor().charAt(3)))) < Integer.parseInt(String.valueOf(mostExpensiveCar.getValor().charAt(3)))){
-          mostExpensiveCar = carro1;
-        }
       }
     }
     System.out.println(mostExpensiveCar.getValor());
