@@ -28,18 +28,26 @@ public final class Requester<T extends Request> {
    }
    public Requester(){}
 
+   /**
+    * Does the request based on the {@code requestStructure} URL
+    * @throws IOException
+    * */
+   public JsonElement doRequest() throws IOException, InterruptedException {
+      //TODO refactor this
 
-   public JsonElement doRequest() throws IOException {
-      HttpURLConnection httpURLConnection;
-      try {
-       httpURLConnection = connection();
+      //Trying the actual connection
+      HttpURLConnection httpURLConnection = connection();
+      int connectResponse =  httpURLConnection.getResponseCode();
 
-      }catch (IOException e){
-          httpURLConnection = connection();
+      //these codes are normally associate with too much requests
+      //this code will try to calm things down and then try again
+      while(connectResponse == 520 || connectResponse == 502){
+
+         Thread.sleep(1000);
+         httpURLConnection = connection();
+         connectResponse = httpURLConnection.getResponseCode();
       }
 
-
-      int connectResponse =  httpURLConnection.getResponseCode();
       //The API may respond with one of those errors, it is quite common
       if (connectResponse != 200) {
          throw new RuntimeException("HttpResponseCode: " + connectResponse);
@@ -55,6 +63,7 @@ public final class Requester<T extends Request> {
    /**
     * Tries the connection
     * */
+   //TODO REFACTOR THIS
    private HttpURLConnection connection() throws IOException {
       URLTypes requestName = requestStructure.getURLStructure();
       URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);

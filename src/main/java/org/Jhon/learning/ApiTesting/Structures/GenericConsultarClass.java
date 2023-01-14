@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public abstract class GenericConsultarClass<T extends Request> {
    protected Requester<T> requester = new Requester<>();
-   public JsonElement getResponse() throws IOException {
+   public JsonElement getResponse() throws IOException, InterruptedException {
       requester.setRequestStructure(getStructure());
       return requester.doRequest();
    }

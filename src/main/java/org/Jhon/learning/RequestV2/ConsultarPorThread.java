@@ -52,14 +52,14 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
          Class<?> model = classLevel.classe;
          Class<?>[] paramType = {item.getClass()};
          try {
-            //todo find what this means
+            //todo find what this warning means
            T instance = (T) model.getDeclaredConstructor(paramType).newInstance(item);
             instance.toModel(instance.getResponse());
             System.out.println(tmp.getAndIncrement() + 1 + " de " + iterationList.size());
          } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println("ERRO AO CARREGAR O " + classLevel.name() + " numero " + tmp.getAndIncrement());
             throw new RuntimeException(e);
-         } catch (IOException e) {
+         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
          }
       });
