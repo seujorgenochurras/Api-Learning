@@ -28,28 +28,53 @@ public final class Requester<T extends Request> {
    }
    public Requester(){}
 
+   /**
+    * Does the request based on the {@code requestStructure} URL
+    * @throws IOException
+    * */
+   public JsonElement doRequest() throws IOException, InterruptedException {
+      //TODO refactor this
 
-   public JsonElement doRequest() throws IOException {
+      //Trying the actual connection
+      HttpURLConnection httpURLConnection = connection();
+      int connectResponse =  httpURLConnection.getResponseCode();
 
-      URLTypes requestName = requestStructure.getURLStructure();
-      URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
-      HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+      //these codes are normally associate with too much requests
+      //this code will try to calm things down and then try again
+      while(connectResponse == 520 || connectResponse == 502){
 
-      urlConnection.setRequestMethod(requestName.requestsType.toString());
-      urlConnection.setDoOutput(true);
-      urlConnection.getOutputStream().write(getParamsAsURL().getBytes()); //TODO ERROR HERE
+         Thread.sleep(1000);
+         httpURLConnection = connection();
+         connectResponse = httpURLConnection.getResponseCode();
+      }
 
-      int connectResponse = urlConnection.getResponseCode();
+      //The API may respond with one of those errors, it is quite common
       if (connectResponse != 200) {
          throw new RuntimeException("HttpResponseCode: " + connectResponse);
       }
-      BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+      BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
       String rawJson = in.readLine();
       in.close();
       Gson gson = new Gson();
 
       return gson.fromJson(rawJson, JsonElement.class);
    }
+
+   /**
+    * Tries the connection
+    * */
+   //TODO REFACTOR THIS
+   private HttpURLConnection connection() throws IOException {
+      URLTypes requestName = requestStructure.getURLStructure();
+      URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
+      HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+      urlConnection.setRequestMethod(requestName.requestsType.toString());
+      urlConnection.setDoOutput(true);
+      urlConnection.getOutputStream().write(getParamsAsURL().getBytes());
+      return urlConnection;
+   }
+
 
    private String getParamsAsURL(){
       return requestStructure.getURL().toString();

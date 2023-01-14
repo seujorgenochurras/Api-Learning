@@ -9,6 +9,7 @@ import org.Jhon.learning.Models.Structure.IModel;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thread {
@@ -16,17 +17,17 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
    /**
     * list that it will iterate and get its models
     * */
-   private ArrayList<? extends IModel> iterationList = new ArrayList<>();
+   private List<? extends IModel> iterationList = new ArrayList<>();
    private ClassModel classLevel;
-   public ArrayList<? extends IModel> getIterationList() {
+   public List<? extends IModel> getIterationList() {
       return iterationList;
    }
 
-   public void setIterationList(ArrayList<? extends IModel> iterationList) {
+   public  <H extends IModel> void setIterationList(List<H> iterationList) {
       this.iterationList = iterationList;
    }
 
-   public ConsultarPorThread(ArrayList<? extends IModel> listaDePesquisa){
+   public <H extends IModel>ConsultarPorThread(List<H> listaDePesquisa){
       try {
          listaDePesquisa.get(0);
       }catch (IndexOutOfBoundsException e){
@@ -51,14 +52,14 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
          Class<?> model = classLevel.classe;
          Class<?>[] paramType = {item.getClass()};
          try {
-            //todo find what this means
+            //todo find what this warning means
            T instance = (T) model.getDeclaredConstructor(paramType).newInstance(item);
             instance.toModel(instance.getResponse());
-            System.out.println(tmp.getAndIncrement() + " de " + iterationList.size());
+            System.out.println(tmp.getAndIncrement() + 1 + " de " + iterationList.size());
          } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println("ERRO AO CARREGAR O " + classLevel.name() + " numero " + tmp.getAndIncrement());
             throw new RuntimeException(e);
-         } catch (IOException e) {
+         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
          }
       });

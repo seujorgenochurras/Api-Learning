@@ -10,7 +10,6 @@ public interface MarcasRequest extends Request{
 
    @Range(from = 1, to = 3) @NotNull Integer getCodigoTipoVeiculo();
 
-
    /**
     * @return id da data da tabela
     * */

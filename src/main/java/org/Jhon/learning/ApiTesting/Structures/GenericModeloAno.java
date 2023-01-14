@@ -1,7 +1,6 @@
 package org.Jhon.learning.ApiTesting.Structures;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.google.gson.*;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
 import org.Jhon.learning.Models.ModeloAno;
 
@@ -22,20 +21,36 @@ public abstract class GenericModeloAno<T extends AnoModeloRequest> extends Gener
    @Override
    public void toModel(JsonElement jsonElement) {
       if(Objects.isNull(jsonElement)) throw new IllegalStateException("CANNOT SAVE NULL JSON");
-      JsonArray jsonArray = jsonElement.getAsJsonArray();
-      jsonArray.forEach(item ->{
-         String[] rawValues = item.getAsJsonObject().get("Value").getAsString().split("-");
-         //"Value":"1992-1"
-         String ano = rawValues[0];
-         int combustivel = Integer.parseInt(rawValues[1]);
-         ModeloAno modeloAno = new ModeloAno();
-         modeloAno.setName(ano);
-         modeloAno.setValue(combustivel);
-         modeloAno.setModeloID(getModeloID());
-         modeloAno.setMarcaID(getMarcaID());
-         modeloAno.setVeiculoID(getVehicleID());
-         modeloAno.setTabelaReferencialID(getTabelaReferenciaID());
-         modeloAno.addToList();
+      //Getting only the years
+      JsonArray jsonYears = jsonElement.getAsJsonArray();
+
+      //Creating an emulated response Json
+      JsonArray emulatedJson = new JsonArray();
+      JsonObject emulatedFields = new JsonObject();
+
+      jsonYears.forEach(field ->{
+
+          //Transforming JsonField "Value" into the two needed values
+          String[] valueFields = field.getAsJsonObject().get("Value").getAsString().split("-");
+          String ano = valueFields[0];
+          String combustivelID = valueFields[1];
+
+
+      emulatedFields.add("Label", JsonParser.parseString(ano) );
+      emulatedFields.add("Value",  JsonParser.parseString(combustivelID));
+      emulatedJson.add(emulatedFields);
       });
+
+     parseToModel(emulatedJson, ModeloAno.class);
+   }
+
+   @Override
+   protected void getAdditionalMethods(Object model) {
+     ModeloAno modeloAno = (ModeloAno) model;
+      modeloAno.setModeloID(getModeloID());
+      modeloAno.setMarcaID(getMarcaID());
+      modeloAno.setVeiculoID(getVehicleID());
+      modeloAno.setTabelaReferencialID(getTabelaReferenciaID());
+      modeloAno.addToList();
    }
 }

@@ -1,20 +1,31 @@
 package org.Jhon.learning.Models.Structure;
 
+import com.google.gson.JsonPrimitive;
+
 public abstract class GenericAPIRequester<T extends IModel> {
-     private String name;
+   /**
+    * name of the value
+    * @see org.Jhon.learning.ApiTesting.Structures.GenericConsultarClass
+    * */
+     private String label;
      private int value;
 
 
-   public String getName() {
-      return name;
+   public String getLabel() {
+      return label;
    }
-   public void setName(String name) {
-      this.name = name;
+   public void setLabel(JsonPrimitive label) {
+      this.label = label.getAsString();
+   } public void setLabel(String label) {
+      this.label = label;
    }
    public int getValue() {
       return value;
    }
-   public void setValue(int value) {
+   public void setValue(JsonPrimitive value) {
+      this.value = value.getAsInt();
+   }
+     public void setValue(int value) {
       this.value = value;
    }
    public Class<?> getInstace(){

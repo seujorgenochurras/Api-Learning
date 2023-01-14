@@ -1,33 +1,39 @@
 package org.Jhon.learning.RequestV2;
 
-import org.Jhon.learning.Models.Marca;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 public class ListUtils {
    /**
     *
+    * Divides a {@code List<>} by the partitions size
+    *
+    * @param list list to be divided
+    * @param partitions number of partitions that you want the list to have
     * */
-   public static ArrayList<ArrayList<?>> divideList(ArrayList<?> arrayList, int partitions) {
+   public static <T> List<List<T>> divideList(List<T> list, int partitions) {
+      //Dividing partitions
+      int elementsPerPartition = list.size() / partitions;
 
-      int numberOfElementsByPartitions = 0;
-      if (arrayList.size() % partitions != 0) {
-         System.out.println("WARNING!! CANNOT DIVIDE SIZE OF ARRAYLIST("+ arrayList.size()+") WITH THE NUMBER PROVIDED (" + partitions + ") YOU WILL HAVE A LOSS OF DATA");
+      //if cant be equally divided, some lists may have 1 more element
+      //this is the rest of the elements that couldn't fit
+      int elementsPerPartitionBuffer = list.size() % partitions;
+
+
+      List<List<T>> result = new ArrayList<>(list.size());
+
+      int startIndex = 0;
+      int endIndex = elementsPerPartition;
+      for(int i = 0; i < partitions; i++){
+         if(elementsPerPartitionBuffer > 0){
+            endIndex++;
+            elementsPerPartitionBuffer--;
+         }
+         result.add(new ArrayList<>(list.subList(startIndex, endIndex)));
+         startIndex = endIndex;
+         endIndex += elementsPerPartition;
       }
-      numberOfElementsByPartitions += arrayList.size() / partitions;
-      ArrayList<ArrayList<?>> finale = new ArrayList<>();
-
-      ArrayList<Object> tmp = new ArrayList<>();
-      for(int j = 0; j < partitions; j++){
-      for (int i = 0; i < numberOfElementsByPartitions; i++ ){
-        tmp.add(arrayList.get(0));
-        arrayList.remove(0);
-      }
-      finale.add((ArrayList<?>) tmp.clone()); //TODO learn more about shallow and deep copies
-      tmp.clear();
-     }
-     return finale;
-
+      return result;
    }
 }
