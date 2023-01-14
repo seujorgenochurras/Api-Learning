@@ -4,7 +4,6 @@ import org.Jhon.learning.ApiTesting.Consultar.ConsultarAnoModelo;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarModelos;
 import org.Jhon.learning.ApiTesting.Consultar.ConsultarVeiculo;
 import org.Jhon.learning.ApiTesting.Structures.GenericConsultarClass;
-import org.Jhon.learning.Models.ModeloAno;
 import org.Jhon.learning.Models.Structure.IModel;
 
 import java.io.IOException;
@@ -56,7 +55,7 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
             //todo find what this means
            T instance = (T) model.getDeclaredConstructor(paramType).newInstance(item);
             instance.toModel(instance.getResponse());
-            System.out.println(tmp.getAndIncrement() + " de " + iterationList.size());
+            System.out.println(tmp.getAndIncrement() + 1 + " de " + iterationList.size());
          } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println("ERRO AO CARREGAR O " + classLevel.name() + " numero " + tmp.getAndIncrement());
             throw new RuntimeException(e);

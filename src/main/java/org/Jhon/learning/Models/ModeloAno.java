@@ -1,6 +1,5 @@
 package org.Jhon.learning.Models;
 
-import com.google.gson.JsonElement;
 import org.Jhon.learning.Models.Structure.Combustivel;
 import org.Jhon.learning.Models.Structure.GenericModeloAnoModel;
 import org.Jhon.learning.Models.Structure.IModel;

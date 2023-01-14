@@ -7,6 +7,10 @@ import java.util.List;
 public class ListUtils {
    /**
     *
+    * Divides a {@code List<>} by the partitions size
+    *
+    * @param list list to be divided
+    * @param partitions number of partitions that you want the list to have
     * */
    public static <T> List<List<T>> divideList(List<T> list, int partitions) {
       //Dividing partitions

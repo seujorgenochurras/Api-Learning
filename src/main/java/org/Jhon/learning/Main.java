@@ -7,14 +7,12 @@ import org.Jhon.learning.ApiTesting.Consultar.ConsultarVeiculo;
 import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
-import org.Jhon.learning.Models.Structure.IModel;
 import org.Jhon.learning.Models.Veiculo;
 import org.Jhon.learning.RequestV2.ConsultarPorThread;
 import org.Jhon.learning.RequestV2.ListUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

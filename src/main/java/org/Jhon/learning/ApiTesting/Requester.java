@@ -30,7 +30,32 @@ public final class Requester<T extends Request> {
 
 
    public JsonElement doRequest() throws IOException {
+      HttpURLConnection httpURLConnection;
+      try {
+       httpURLConnection = connection();
 
+      }catch (IOException e){
+          httpURLConnection = connection();
+      }
+
+
+      int connectResponse =  httpURLConnection.getResponseCode();
+      //The API may respond with one of those errors, it is quite common
+      if (connectResponse != 200) {
+         throw new RuntimeException("HttpResponseCode: " + connectResponse);
+      }
+      BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+      String rawJson = in.readLine();
+      in.close();
+      Gson gson = new Gson();
+
+      return gson.fromJson(rawJson, JsonElement.class);
+   }
+
+   /**
+    * Tries the connection
+    * */
+   private HttpURLConnection connection() throws IOException {
       URLTypes requestName = requestStructure.getURLStructure();
       URL url = new URL("https://veiculos.fipe.org.br/api/veiculos//" + requestName.value);
       HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -38,17 +63,7 @@ public final class Requester<T extends Request> {
       urlConnection.setRequestMethod(requestName.requestsType.toString());
       urlConnection.setDoOutput(true);
       urlConnection.getOutputStream().write(getParamsAsURL().getBytes());
-
-      int connectResponse = urlConnection.getResponseCode();
-      if (connectResponse != 200) {
-         throw new RuntimeException("HttpResponseCode: " + connectResponse);
-      }
-      BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-      String rawJson = in.readLine();
-      in.close();
-      Gson gson = new Gson();
-
-      return gson.fromJson(rawJson, JsonElement.class);
+      return urlConnection;
    }
 
 
