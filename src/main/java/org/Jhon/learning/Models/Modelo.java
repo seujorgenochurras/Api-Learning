@@ -21,6 +21,13 @@ public class Modelo extends GenericModeloModel implements IModel {
       instances.add(this); //TODO fix this
    }
 
+   public Modelo(int modeloID, int vehicleID, int tabelaID, int marcaID){
+      setModeloID(modeloID);
+      setTabelaReferencialID(tabelaID);
+      setVeiculoID(vehicleID);
+      setMarcaID(marcaID);
+   }
+   public Modelo(){}
    public static void mostrar() {
       System.out.println("mostrnado");
       modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));

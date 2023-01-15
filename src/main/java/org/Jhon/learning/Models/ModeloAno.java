@@ -17,11 +17,6 @@ public class ModeloAno extends GenericModeloAnoModel implements IModel {
    public static final TreeMap<String, Integer> anoModelos = new TreeMap<>();
    public static final List<ModeloAno> instances = new ArrayList<>();
    public ModeloAno(){}
-   public ModeloAno(String ano, int combustivelID){
-      setLabel(ano);
-      setValue(combustivelID);
-
-   }
    public Combustivel getCombustivel(){
       return Combustivel.getByValue(getValue());
    }
