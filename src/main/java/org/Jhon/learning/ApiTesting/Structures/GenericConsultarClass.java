@@ -2,6 +2,7 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.mysql.cj.xdevapi.JsonValue;
 import org.Jhon.learning.ApiTesting.Requester;
 import org.Jhon.learning.ApiTesting.Structures.Request.Request;
 import org.Jhon.learning.Models.Structure.GenericAPIRequester;

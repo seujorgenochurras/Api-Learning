@@ -100,15 +100,15 @@ public class Veiculo extends GenericVehicleStructure implements IModel {
     System.out.println("*****FIM DO VEICULO*****\n");
   }
 
-  public static ArrayList<Veiculo> get2023Cars(){
-    ArrayList<Veiculo> result = new ArrayList<>();
-    for(Veiculo carro1 : carro){
-     if(carro1.getAnoModelo().isAfter(Year.of(2022)) && carro1.getAnoModelo().isBefore(Year.of(2024))){
-       result.add(carro1);
-     }
-    }
-    return result;
-  }
+//  public static ArrayList<Veiculo> get2023Cars(){
+//    ArrayList<Veiculo> result = new ArrayList<>();
+//    for(Veiculo carro1 : carro){
+//     if(carro1.getAnoModelo().isAfter(Year.of(2022)) && carro1.getAnoModelo().isBefore(Year.of(2024))){
+//       result.add(carro1);
+//     }
+//    }
+//    return result;
+//  }
 
 
 }

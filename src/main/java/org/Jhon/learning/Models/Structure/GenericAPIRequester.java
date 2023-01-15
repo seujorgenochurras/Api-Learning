@@ -11,14 +11,25 @@ public abstract class GenericAPIRequester<T extends IModel> {
      private int value;
 
 
+     /**
+      * Return the name
+      * */
    public String getLabel() {
       return label;
+   }
+
+   //TODO REMOVE THIS LATER
+   public String getName(){
+      return getLabel();
    }
    public void setLabel(JsonPrimitive label) {
       this.label = label.getAsString();
    } public void setLabel(String label) {
       this.label = label;
    }
+  /**
+   * usually Returns the ID
+   * */
    public int getValue() {
       return value;
    }

@@ -1,6 +1,7 @@
 package org.Jhon.learning.Models.Structure;
 
 import com.google.gson.JsonPrimitive;
+import org.Jhon.learning.Models.Veiculo;
 
 import java.time.Year;
 
@@ -8,7 +9,7 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    private String codigoFipe;
    private String marca;
    private String modelo;
-   private Year anoModelo;
+   private int anoModelo;
    private String combustivel;
    private String siglaCombustivel;
    private String autenticacao;
@@ -16,6 +17,11 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    private String valor;
    private String mesReferencia;
    private int tipoVeiculo;
+
+   @Override
+   public String getName(){
+      return getMarca() + " "+ getModelo();
+   }
 
    public String getSiglaCombustivel() {
       return siglaCombustivel;
@@ -83,14 +89,14 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
       this.modelo = modelo;
    }
 
-   public Year getAnoModelo() {
+   public int getAnoModelo() {
       return anoModelo;
    }
 
    public void setAnoModelo(JsonPrimitive anoModelo) {
-      this.anoModelo = Year.of(anoModelo.getAsInt());
+      this.anoModelo = anoModelo.getAsInt();
    }
-   public void setAnoModelo(Year anoModelo) {
+   public void setAnoModelo(int anoModelo) {
       this.anoModelo = anoModelo;
    }
 
@@ -129,6 +135,7 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
 
    /**
     * @return Raw price of the vehicle, containing monetary symbol
+    * @see Veiculo#getNumberPrice()
     * */
    public String getValor() {
       return valor;
