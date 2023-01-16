@@ -2,6 +2,7 @@ package org.Jhon.learning.MySQL;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.Jhon.learning.Models.Structure.IModel;
+import org.Jhon.learning.MySQL.Structures.SQLInsert;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,14 +13,20 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Objects;
 
-public class SQLConnector {
+public class SQLConnector{
+
+   public Connection getConnection() {
+      return connection;
+   }
+
+   private Connection connection;
    /**
     * This needs the {@code Dotenv} Database information
     *
     * */
-   public static Connection getSQLConnection(){
+   public void createSQLConnection(){
    Connection connection;
-   Dotenv dotenv = Dotenv.load();
+   Dotenv dotenv = Dotenv.configure().load();
 
       String dbURL = dotenv.get("DATABASE_URL");
       String dbUser = dotenv.get("DATABASE_USER");
@@ -30,11 +37,11 @@ public class SQLConnector {
       if(!Objects.isNull(dbCatalog)){
          connection.setCatalog(dbCatalog);
       }
-      return connection;
+      this.connection = connection;
    }catch (SQLException e){
       System.out.println(e.getMessage());
-      return null;
       }
+
    }
    /**
     * Not the hack stuff lol
@@ -42,24 +49,26 @@ public class SQLConnector {
     * @param sql sql code
     *
     * */
-   public static void sqlInject(String sql){
+   public void sqlInject(String sql){
       try {
-      Statement statement = getSQLConnection().createStatement();
+      Statement statement = this.connection.createStatement();
       statement.execute(sql);
       }catch (SQLException e){
          System.out.println(e.getMessage());
+         System.out.println(e);
       }
-      System.out.println("Successfully injected sql code");
    }
 
       /**
        * Creates an {@code insert sql code} based on the instaces of the model list
-       * However, most of the time this won't work,
+       * However, most of the time this won't work.
+       * @see SQLInsert#getInsertCommand()
        * */
-      public static <T extends IModel> String insertModel(List<T> modelList, String tableName){
+      @Deprecated
+      public <T extends IModel> String insertModelCode(List<T> modelList, String tableName){
          StringBuilder stringBuilder = new StringBuilder();
 
-         stringBuilder.append("INSERT INTO ").append(tableName).append(" VALUES");
+         stringBuilder.append("INSERT INTO ").append(tableName).append(" VALUES (");
 
          Class<? extends IModel> modelClass = modelList.get(0).getClass();
          Method[] modelClassMethods = modelClass.getMethods();
@@ -72,7 +81,7 @@ public class SQLConnector {
                      if(methodReturnString){
                         stringBuilder.append("\"");
                      }
-                     stringBuilder.append(method.invoke(model, (Object) null));
+                     stringBuilder.append(method.invoke(model));
                      if(methodReturnString){
                         stringBuilder.append("\"");
                      }

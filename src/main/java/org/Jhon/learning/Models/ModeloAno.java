@@ -3,13 +3,15 @@ package org.Jhon.learning.Models;
 import org.Jhon.learning.Models.Structure.Combustivel;
 import org.Jhon.learning.Models.Structure.GenericModeloAnoModel;
 import org.Jhon.learning.Models.Structure.IModel;
+import org.Jhon.learning.MySQL.Structures.SQLInsert;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 
-public class ModeloAno extends GenericModeloAnoModel implements IModel {
+public class ModeloAno extends GenericModeloAnoModel implements IModel, SQLInsert {
    /**
     * String é o ano <br>
     * Integer é o combustivel
@@ -30,5 +32,17 @@ public class ModeloAno extends GenericModeloAnoModel implements IModel {
      instances.forEach(item -> System.out.println(item.getLabel() + " : " + item.getCombustivel().name()));
    }
 
+   @Override
+   public Method[] getMethods() throws NoSuchMethodException {
+      Class<? extends ModeloAno> instance = this.getClass();
+      Method getModeloFK = instance.getMethod("getModeloID");
+      Method getAno = instance.getMethod("getAno");
 
+      return new Method[]{getAno, getModeloFK};
+   }
+
+   @Override
+   public String getTableName() {
+      return "modeloAno";
+   }
 }

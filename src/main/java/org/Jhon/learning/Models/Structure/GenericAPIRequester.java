@@ -9,17 +9,18 @@ public abstract class GenericAPIRequester<T extends IModel> {
     * */
      private String label;
      private int value;
-
-
      /**
-      * Return the name
+      * Returns the name
+      * cant change to getName, because of the way that requester works
+      * @see org.Jhon.learning.ApiTesting.Structures.GenericConsultarClass
       * */
    public String getLabel() {
       return label;
    }
-
-   //TODO REMOVE THIS LATER
-   public String getName(){
+   public int getID(){
+      return getValue();
+   }
+   public String getNome(){
       return getLabel();
    }
    public void setLabel(JsonPrimitive label) {
@@ -39,10 +40,9 @@ public abstract class GenericAPIRequester<T extends IModel> {
      public void setValue(int value) {
       this.value = value;
    }
-   public Class<?> getInstace(){
-      return this.getClass();
+   public Class<T> getModelInstace(){
+      return (Class<T>) this.getClass();
    }
-
    /**
     * A list of all instances
     * */

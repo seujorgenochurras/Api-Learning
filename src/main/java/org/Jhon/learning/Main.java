@@ -8,12 +8,12 @@ import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
 import org.Jhon.learning.Models.Veiculo;
+import org.Jhon.learning.MySQL.SQLConnector;
 import org.Jhon.learning.RequestV2.ConsultarPorThread;
 import org.Jhon.learning.RequestV2.ListUtils;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.sql.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,11 +21,16 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
    public static void main(String[] args) throws InterruptedException, IOException {
+   for(int i = 1; i < 3; i++){
+      Thread.sleep(200000);
+      Marca.instances.clear();
+      Modelo.instances.clear();
+      ModeloAno.instances.clear();
+      Veiculo.carro.clear();
       try {
       //Pegando marcas
-      ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
-      consultarMarcas.toModel(consultarMarcas.getResponse());
-
+         ConsultarMarcas consultarMarcas = new ConsultarMarcas(i, 292);
+         consultarMarcas.toModel(consultarMarcas.getResponse());
       //Separando Lista de todas as marcas de 23 partes iguais
       List<List<Marca>> marcasLists = ListUtils.divideList(Marca.instances, 16);
 
@@ -37,7 +42,7 @@ public class Main {
          consultarModelosPorThread.start();
          });
       });
-      if(modelosExecuter.awaitTermination(10, TimeUnit.SECONDS)){
+      if(modelosExecuter.awaitTermination(60, TimeUnit.SECONDS)){
       modelosExecuter.shutdown();
       }
 
@@ -53,11 +58,11 @@ public class Main {
          consultarAnoModeloPorThread.start();
          });
       });
-      if(anoModeloExecuter.awaitTermination(30, TimeUnit.SECONDS)){
+      if(anoModeloExecuter.awaitTermination(150, TimeUnit.SECONDS)){
          anoModeloExecuter.shutdown();
       }
       //Separando Anos dos Modelos em 600 threads
-      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,500);
+      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,600);
 
       //Encontrando todos os carros
       ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
@@ -67,35 +72,50 @@ public class Main {
             consultarVeiculoPorThread.start();
          });
       });
-      if(anoModeloExecuter.awaitTermination(45, TimeUnit.SECONDS)){
+      if(anoModeloExecuter.awaitTermination(150, TimeUnit.SECONDS)){
          anoModeloExecuter.shutdown();
       }
-      } catch (MalformedURLException e) {
-         System.out.println(e.getMessage());
-      } catch (IOException | InterruptedException e) {
+      } catch (InterruptedException e) {
          throw new RuntimeException(e);
       }
 
-      Connection connection;
-      StringBuilder sqlInsertCarro = new StringBuilder();
-      sqlInsertCarro.append("INSERT INTO carro (Nome, Valor, Marca, Modelo, AnoModelo, Combustivel, CodigoFipe, MesReferencia, Autenticacao, TipoVeiculo, SiglaCombusitvel, DataConsulta) VALUES");
-      Veiculo.carro.forEach(carro ->{
-         sqlInsertCarro.append("(\"" + carro.getName() + "\", " + carro.getNumberPrice()
-                 + ", \"" + carro.getMarca() + "\", \"" + carro.getModelo() + "\"," + carro.getAnoModelo()
-                 + ", \"" + carro.getCombustivel() + "\", \"" + carro.getCodigoFipe() + "\", \"" + carro.getMesReferencia()
-                 + "\", \"" + carro.getAutenticacao() + "\", " + carro.getTipoVeiculo() + ", \"" + carro.getSiglaCombustivel()
-                 + "\", \"" + carro.getDataConsulta() + "\"),");
+      SQLConnector sqlConnector = new SQLConnector();
+      sqlConnector.createSQLConnection();
+
+      System.out.println("Injecting sql code");
+         Marca.instances.forEach(instace ->{
+            try {
+               sqlConnector.sqlInject(instace.getInsertCommand());
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException e) {
+               throw new RuntimeException(e);
+            }
+         });
+      Modelo.instances.forEach(instace ->{
+         try {
+            sqlConnector.sqlInject(instace.getInsertCommand());
+         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                  IllegalAccessException e) {
+            throw new RuntimeException(e);
+         }
       });
-      //Removing last ")," so it won't get an error
-      String sql = sqlInsertCarro.deleteCharAt(sqlInsertCarro.length()-1).toString();
-      try{
-         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/apilearning", "root","Macro!");
-         Statement statement = connection.createStatement();
-         connection.setCatalog("APILearning");
-         statement.execute(sql);
-      }catch (SQLException e){
-         System.out.println(e.getMessage());
+         ModeloAno.instances.forEach(instace ->{
+            try {
+               sqlConnector.sqlInject(instace.getInsertCommand());
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException e) {
+               throw new RuntimeException(e);
+            }
+         });
+         Veiculo.carro.forEach(instace ->{
+            try {
+               sqlConnector.sqlInject(instace.getInsertCommand());
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException e) {
+               throw new RuntimeException(e);
+            }
+         });
+      System.out.println("Injection finished");
       }
    }
-
 }

@@ -3,45 +3,43 @@ package org.Jhon.learning.Models.Structure;
 import com.google.gson.JsonPrimitive;
 import org.Jhon.learning.Models.Veiculo;
 
-import java.time.Year;
-
 public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    private String codigoFipe;
    private String marca;
    private String modelo;
    private int anoModelo;
    private String combustivel;
-   private String siglaCombustivel;
+   private Character siglaCombustivel;
    private String autenticacao;
    private String dataConsulta;
    private String valor;
    private String mesReferencia;
-   private int tipoVeiculo;
+   private byte tipoVeiculo;
 
    @Override
-   public String getName(){
+   public String getNome(){
       return getMarca() + " "+ getModelo();
    }
 
-   public String getSiglaCombustivel() {
+   public Character getSiglaCombustivel() {
       return siglaCombustivel;
    }
 
    public void setSiglaCombustivel(JsonPrimitive siglaCombustivel) {
-         this.siglaCombustivel = siglaCombustivel.getAsJsonPrimitive().getAsString();
+         this.siglaCombustivel = siglaCombustivel.getAsJsonPrimitive().getAsString().charAt(0);
   }
-  public void setSiglaCombustivel(String siglaCombustivel) {
+  public void setSiglaCombustivel(Character siglaCombustivel) {
          this.siglaCombustivel = siglaCombustivel;
   }
 
-   public int getTipoVeiculo() {
+   public byte getTipoVeiculo() {
       return tipoVeiculo;
    }
 
    public void setTipoVeiculo(JsonPrimitive tipoVeiculo) {
-         this.tipoVeiculo = tipoVeiculo.getAsInt();
+         this.tipoVeiculo = tipoVeiculo.getAsByte();
    }
-   public void setTipoVeiculo(int tipoVeiculo) {
+   public void setTipoVeiculo(byte tipoVeiculo) {
          this.tipoVeiculo = tipoVeiculo;
    }
 
@@ -135,7 +133,7 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
 
    /**
     * @return Raw price of the vehicle, containing monetary symbol
-    * @see Veiculo#getNumberPrice()
+    * @see Veiculo#getPreco()
     * */
    public String getValor() {
       return valor;
@@ -147,4 +145,5 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    public void setValor(String valor) {
       this.valor = valor;
    }
+
 }
