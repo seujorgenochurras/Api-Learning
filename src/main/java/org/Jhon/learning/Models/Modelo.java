@@ -25,22 +25,29 @@ public class Modelo extends GenericModeloModel implements IModel, SQLInsert {
 
    public Modelo(int modeloID, int vehicleID, int tabelaID, int marcaID){
       setModeloID(modeloID);
-      setTabelaReferencialID(tabelaID);
-      setVeiculoID(vehicleID);
-      setMarcaID(marcaID);
+      getMarcaObject().setTabelaReferencialID(tabelaID);
+       getMarcaObject().setVeiculoID(vehicleID);
+       getMarcaObject().setValue(marcaID);
    }
    public Modelo(){}
    public static void mostrar() {
       System.out.println("mostrnado");
-      modelos.forEach((nome, value) -> System.out.println(nome + ": " + value));
+      instances.forEach(item -> {
+         System.out.println("COMEÇANDO");
+        System.out.println("Nome " + item.getModelName() + "\nID " + item.getID());
+          System.out.println("VEHICLE ID " + item.getMarcaObject().getVeiculoID() + "\nMARCA ID " + item.getMarcaObject().getID());
+         System.out.println(item.getTableName());
+         System.out.println(item);
+
+      });
    }
 
    @Override
    public Method[] getMethods() throws NoSuchMethodException {
       Class<? extends Modelo> instance = this.getClass();
       Method getID = instance.getMethod("getID");
-      Method getMarcaFK = instance.getMethod("getMarcaID");
-      Method getNome = instance.getMethod("getNome");
+      Method getMarcaFK = instance.getMethod("getMarcaFK");
+      Method getNome = instance.getMethod("getModelName");
       return new Method[]{getID, getMarcaFK, getNome};
    }
 

@@ -1,14 +1,16 @@
 package org.Jhon.learning.Models.Structure;
 
 public enum Combustivel {
-   GASOLINA(1),
-   ALCOOL(2),
-   DIESEL(3),
-   ETANOL(4),
-   OUTROS(5);
+   GASOLINA(1, 'G'),
+   ALCOOL(2, 'Á'),
+   DIESEL(3, 'D'),
+   ETANOL(4, 'E'),
+   OUTROS(5, 'U');
 
    public final int value;
-   Combustivel(int value){
+   public final char symbol;
+   Combustivel(int value, char symbol){
+      this.symbol = symbol;
       this.value = value;
    }
    public static Combustivel getByValue(int value){

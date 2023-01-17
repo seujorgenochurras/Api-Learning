@@ -3,28 +3,20 @@ package org.Jhon.learning.ApiTesting.Structures;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.Request.VeiculoRequest;
+import org.Jhon.learning.Models.ModeloAno;
 import org.Jhon.learning.Models.Veiculo;
 
 import java.util.Objects;
 
 public abstract class GenericVeiculoClass<T extends VeiculoRequest> extends GenericModeloAno<T>  {
-   private int combustivelID;
-   private String anoModeloID;
+   private ModeloAno modeloAno;
 
-   public int getCombustivelID() {
-      return combustivelID;
+   public ModeloAno getModeloAno() {
+      return modeloAno;
    }
 
-   public void setCombustivelID(int combustivelID) {
-      this.combustivelID = combustivelID;
-   }
-
-   public String getAnoModeloID() {
-      return anoModeloID;
-   }
-
-   public void setAnoModeloID(String anoModeloID) {
-      this.anoModeloID = anoModeloID;
+   public void setModeloAno(ModeloAno modeloAno) {
+      this.modeloAno = modeloAno;
    }
    @Override
    public void toModel(JsonElement jsonElement) {
@@ -37,6 +29,7 @@ public abstract class GenericVeiculoClass<T extends VeiculoRequest> extends Gene
    @Override
    protected void getAdditionalMethods(Object model) {
       Veiculo veiculo = (Veiculo) model;
+      veiculo.setModeloAnoObject(getModeloAno());
       veiculo.addToList();
    }
 }

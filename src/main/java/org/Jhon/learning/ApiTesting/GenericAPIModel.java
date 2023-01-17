@@ -18,12 +18,6 @@ public abstract class GenericAPIModel<T extends IModel> {
    public String getLabel() {
       return label;
    }
-   public int getID(){
-      return getValue();
-   }
-   public String getNome(){
-      return getLabel();
-   }
    public void setLabel(JsonPrimitive label) {
       this.label = label.getAsString();
    } public void setLabel(String label) {
@@ -38,15 +32,37 @@ public abstract class GenericAPIModel<T extends IModel> {
    public void setValue(JsonPrimitive value) {
       this.value = value.getAsInt();
    }
+
+   /**
+    * @param value The id of the model
+    * */
      public void setValue(int value) {
       this.value = value;
    }
    public Class<T> getModelInstace(){
       return (Class<T>) this.getClass();
    }
+
+
+   /**
+    * Literally the same as getValue()
+    * */;
+   public int getID(){
+      return getValue();
+   }
+   /**
+    * Literally the same as getLabel()
+    * */;
+   public String getModelName(){
+      return getLabel();
+   }
+
+
    /**
     * A list of all instances
     * */
    abstract public void addToList();
+
+
 
 }

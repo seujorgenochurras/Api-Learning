@@ -37,21 +37,27 @@ public class Veiculo extends GenericVehicleStructure implements IModel, SQLInser
     return null;
     }
   }
+
+  @Override
+  public int getID() {
+    throw new IllegalStateException("Carro não tem id próprio, use o código fipe como id");
+  }
+
   @Override
   public Method[] getMethods() throws NoSuchMethodException {
     Class<? extends Veiculo> instance = this.getClass();
-    Method getNome = instance.getMethod("getNome");
+    Method getNome = instance.getMethod("getModelName");
     Method getPreco = instance.getMethod("getPreco");
-    Method getMarcaNome = instance.getMethod("getMarca");
-    Method getModeloNome = instance.getMethod("getModelo");
-    Method getAnoModelo = instance.getMethod("getAnoModelo");
-    Method getCombustivel = instance.getMethod("getCombustivel");
+    Method getMarcaNome = instance.getMethod("getMarcaNome");
+    Method getModeloNome = instance.getMethod("getModeloNome");
+    Method getAnoModelo = instance.getMethod("getAno");
+    Method getCombustivel = instance.getMethod("getCombustivelName");
     Method getSiglaCombustivel = instance.getMethod("getSiglaCombustivel");
     Method getFipe = instance.getMethod("getCodigoFipe");
     Method getMesReferencia = instance.getMethod("getMesReferencia");
     Method getAutenticacao = instance.getMethod("getAutenticacao");
     Method getDataConsulta = instance.getMethod("getDataConsulta");
-      Method getTipoVeiculo = instance.getMethod("getVeiculoTipoNome");
+    Method getTipoVeiculo = instance.getMethod("getVeiculoTipoNome");
     return new Method[]{getNome, getPreco, getMarcaNome, getModeloNome, getAnoModelo, getTipoVeiculo,
             getCombustivel, getSiglaCombustivel, getFipe, getMesReferencia, getAutenticacao, getDataConsulta};
   }

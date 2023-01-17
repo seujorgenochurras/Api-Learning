@@ -17,11 +17,17 @@ public class Marca extends GenericMarcaModel implements IModel, SQLInsert {
     //  System.out.println("added : " + this.getName());
    }
 
+   public static void mostrar(){
+      instances.forEach( instance ->{
+         System.out.println(instance.getModelName() + ": " + instance.getValue());
+      });
+   }
+
    @Override
    public Method[] getMethods() throws NoSuchMethodException {
       Class<? extends Marca> instance = this.getClass();
       Method getID = instance.getMethod("getID");
-      Method getNome = instance.getMethod("getNome");
+      Method getNome = instance.getMethod("getModelName");
       Method getVeiculoID = instance.getMethod("getVeiculoID");
       Method getMesReferencia = instance.getMethod("getTabelaReferencialID");
 

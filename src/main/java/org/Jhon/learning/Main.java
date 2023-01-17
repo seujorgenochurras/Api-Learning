@@ -23,64 +23,77 @@ public class Main {
 
 
    public static void main(String[] args) throws InterruptedException, IOException {
+//   for(int i = 1; i < 4; i++){
+//      Marca.instances.clear();
+//      Modelo.instances.clear();
+//      ModeloAno.instances.clear();
+//      Veiculo.carro.clear();
+//
+//      try {
+//      //Pegando marcas
+//         ConsultarMarcas consultarMarcas = new ConsultarMarcas(i, 293);
+//         consultarMarcas.toModel(consultarMarcas.getResponse());
+//      //Separando Lista de todas as marcas de 23 partes iguais
+//      List<List<Marca>> marcasLists = ListUtils.divideList(Marca.instances, 16);
+//
+//      //Encontrando todos os modelos
+//      ExecutorService modelosExecuter = Executors.newFixedThreadPool(marcasLists.size());
+//      marcasLists.forEach(marcas ->{
+//         modelosExecuter.submit(()->{
+//         ConsultarPorThread<ConsultarModelos> consultarModelosPorThread = new ConsultarPorThread<>(marcas);
+//         consultarModelosPorThread.start();
+//         });
+//      });
+//      if(modelosExecuter.awaitTermination(60, TimeUnit.SECONDS)){
+//      modelosExecuter.shutdown();
+//      }
+//
+//      //Separando lista com todos os modelos em 500 partes iguais
+//      List<List<Modelo>> modelosList = ListUtils.divideList(Modelo.instances,  139);
+//
+//
+//      //Encontrando todos os Anos dos Modelos
+//      ExecutorService anoModeloExecuter = Executors.newFixedThreadPool(modelosList.size());
+//      modelosList.forEach(item ->{
+//         anoModeloExecuter.submit(()->{
+//         ConsultarPorThread<ConsultarAnoModelo> consultarAnoModeloPorThread = new ConsultarPorThread<>(item);
+//         consultarAnoModeloPorThread.start();
+//         });
+//      });
+//      if(anoModeloExecuter.awaitTermination(150, TimeUnit.SECONDS)){
+//         anoModeloExecuter.shutdown();
+//      }
+//      //Separando Anos dos Modelos em 600 threads
+//      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,700);
+//
+//      //Encontrando todos os carros
+//      ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
+//      anoModeloList.forEach(anoModelo ->{
+//         carroExectuer.submit(()->{
+//            ConsultarPorThread<ConsultarVeiculo> consultarVeiculoPorThread = new ConsultarPorThread<>(anoModelo);
+//            consultarVeiculoPorThread.start();
+//         });
+//      });
+//      if(anoModeloExecuter.awaitTermination(150, TimeUnit.SECONDS)){
+//         anoModeloExecuter.shutdown();
+//      }
+//      } catch (InterruptedException e) {
+//         throw new RuntimeException(e);
+//      }
 
-   for(int i = 1; i < 4; i++){
-      Marca.instances.clear();
-      Modelo.instances.clear();
-      ModeloAno.instances.clear();
-      Veiculo.carro.clear();
+      ConsultarMarcas consultarMarcas = new ConsultarMarcas(1, 293);
+      consultarMarcas.toModel(consultarMarcas.getResponse());
 
-      try {
-      //Pegando marcas
-         ConsultarMarcas consultarMarcas = new ConsultarMarcas(i, 293);
-         consultarMarcas.toModel(consultarMarcas.getResponse());
-      //Separando Lista de todas as marcas de 23 partes iguais
-      List<List<Marca>> marcasLists = ListUtils.divideList(Marca.instances, 16);
-
-      //Encontrando todos os modelos
-      ExecutorService modelosExecuter = Executors.newFixedThreadPool(marcasLists.size());
-      marcasLists.forEach(marcas ->{
-         modelosExecuter.submit(()->{
-         ConsultarPorThread<ConsultarModelos> consultarModelosPorThread = new ConsultarPorThread<>(marcas);
-         consultarModelosPorThread.start();
-         });
-      });
-      if(modelosExecuter.awaitTermination(60, TimeUnit.SECONDS)){
-      modelosExecuter.shutdown();
-      }
-
-      //Separando lista com todos os modelos em 500 partes iguais
-      List<List<Modelo>> modelosList = ListUtils.divideList(Modelo.instances,  139);
+      ConsultarModelos consultarModelos = new ConsultarModelos(Marca.instances.get(0));
+      consultarModelos.toModel(consultarModelos.getResponse());
 
 
-      //Encontrando todos os Anos dos Modelos
-      ExecutorService anoModeloExecuter = Executors.newFixedThreadPool(modelosList.size());
-      modelosList.forEach(item ->{
-         anoModeloExecuter.submit(()->{
-         ConsultarPorThread<ConsultarAnoModelo> consultarAnoModeloPorThread = new ConsultarPorThread<>(item);
-         consultarAnoModeloPorThread.start();
-         });
-      });
-      if(anoModeloExecuter.awaitTermination(150, TimeUnit.SECONDS)){
-         anoModeloExecuter.shutdown();
-      }
-      //Separando Anos dos Modelos em 600 threads
-      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,700);
+      ConsultarAnoModelo consultarAnoModelo = new ConsultarAnoModelo(Modelo.instances.get(0));
+      consultarAnoModelo.toModel(consultarAnoModelo.getResponse());
 
-      //Encontrando todos os carros
-      ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
-      anoModeloList.forEach(anoModelo ->{
-         carroExectuer.submit(()->{
-            ConsultarPorThread<ConsultarVeiculo> consultarVeiculoPorThread = new ConsultarPorThread<>(anoModelo);
-            consultarVeiculoPorThread.start();
-         });
-      });
-      if(anoModeloExecuter.awaitTermination(150, TimeUnit.SECONDS)){
-         anoModeloExecuter.shutdown();
-      }
-      } catch (InterruptedException e) {
-         throw new RuntimeException(e);
-      }
+      ConsultarVeiculo consultarVeiculo = new ConsultarVeiculo(ModeloAno.instances.get(0));
+      consultarVeiculo.toModel(consultarVeiculo.getResponse());
+
 
       SQLConnector sqlConnector = new SQLConnector();
       sqlConnector.createSQLConnection();
@@ -120,7 +133,6 @@ public class Main {
          });
       System.out.println("Injection finished");
       }
-      Thread.sleep(300000);
-      System.out.println("acabou");
+//      Thread.sleep(300000);
+//      System.out.println("acabou");
    }
-}

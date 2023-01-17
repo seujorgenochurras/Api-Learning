@@ -8,16 +8,10 @@ import org.jetbrains.annotations.Range;
 
 
 public class ConsultarModelos extends GenericModelo<ModeloRequest> {
-   public ConsultarModelos(int marcaID, int vehicleID, int tabelaReferenciaID){
-      setMarcaID(marcaID);
-      setVehicleID(vehicleID);
-      setTabelaReferenciaID(tabelaReferenciaID);
-   }
+
    public ConsultarModelos(){}
    public ConsultarModelos(Marca marca){
-      setVehicleID(marca.getVeiculoID());
-      setTabelaReferenciaID(marca.getTabelaReferencialID());
-      setMarcaID(marca.getValue());
+     setMarcaObject(marca);
    }
 
    @Override
@@ -25,17 +19,17 @@ public class ConsultarModelos extends GenericModelo<ModeloRequest> {
       return new ModeloRequest() {
          @Override
          public int getCodigoMarca() {
-            return getMarcaID();
+            return getMarcaObject().getID();
          }
 
          @Override
          public @Range(from = 1, to = 3) @NotNull Integer getCodigoTipoVeiculo() {
-            return getVehicleID();
+            return getMarcaObject().getVeiculoID();
          }
 
          @Override
          public Integer getCodigoTabelaReferencia() {
-            return getTabelaReferenciaID();
+            return getMarcaObject().getTabelaReferencialID();
          }
       };
    }

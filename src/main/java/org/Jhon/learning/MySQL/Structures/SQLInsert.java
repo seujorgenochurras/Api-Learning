@@ -30,7 +30,7 @@ public interface SQLInsert {
      for (Method method : methods) {
         try {
            String returnType =  method.getReturnType().getSimpleName();
-           boolean methodReturnString = returnType.equals("String") || returnType.equals("Character");
+           boolean methodReturnString = returnType.equals("String") || returnType.equals("char") || returnType.equals("Character");
            if (methodReturnString) {
               stringBuilder.append("\"");
            }
