@@ -35,6 +35,9 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    public byte getTipoVeiculo() {
       return tipoVeiculo;
    }
+   public String getVeiculoTipoNome(){
+      return CarTypes.getByValue(getTipoVeiculo()).name();
+   }
 
    public void setTipoVeiculo(JsonPrimitive tipoVeiculo) {
          this.tipoVeiculo = tipoVeiculo.getAsByte();

@@ -9,6 +9,8 @@ import java.util.Objects;
 public abstract class GenericModelo<T extends ModeloRequest> extends GenericMarca<T> {
    private int marcaID;
 
+
+
    public int getMarcaID() {
       return marcaID;
    }

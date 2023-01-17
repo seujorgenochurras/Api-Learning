@@ -5,6 +5,9 @@ public abstract class GenericModeloAnoModel extends GenericModeloModel{
       return super.getModeloID();
    }
    public int getAno(){
+      return Integer.parseInt(getLabel());
+   }
+   public int getGasID(){
       return getValue();
    }
 

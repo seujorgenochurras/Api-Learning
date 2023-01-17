@@ -1,9 +1,10 @@
 package org.Jhon.learning.Models.Structure;
 
 import com.google.gson.JsonPrimitive;
+import org.Jhon.learning.ApiTesting.GenericAPIModel;
 import org.Jhon.learning.Models.Marca;
 
-public abstract class GenericMarcaModel extends GenericAPIRequester<Marca> {
+public abstract class GenericMarcaModel extends GenericAPIModel<Marca> {
    private int veiculoID;
 
    private int marcaID;

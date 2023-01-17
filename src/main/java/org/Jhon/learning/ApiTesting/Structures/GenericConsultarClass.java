@@ -2,10 +2,9 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.mysql.cj.xdevapi.JsonValue;
 import org.Jhon.learning.ApiTesting.Requester;
 import org.Jhon.learning.ApiTesting.Structures.Request.Request;
-import org.Jhon.learning.Models.Structure.GenericAPIRequester;
+import org.Jhon.learning.ApiTesting.GenericAPIModel;
 import org.Jhon.learning.Models.Structure.IModel;
 
 import java.io.IOException;
@@ -31,13 +30,13 @@ public abstract class GenericConsultarClass<T extends Request> {
     * @param jsonArray raw json array of the response
     * @param classModel class of the model that you want to parse the json to
     * */
-   protected void parseToModel(JsonArray jsonArray, Class<? extends GenericAPIRequester<? extends IModel>> classModel){
+   protected void parseToModel(JsonArray jsonArray, Class<? extends GenericAPIModel<? extends IModel>> classModel){
       if(Objects.isNull(jsonArray)) throw new IllegalStateException("JSON CANNOT BE NULL");
       //Getting all json elements
       jsonArray.forEach(item ->{
          try {
             //Creating a model
-            GenericAPIRequester<?> model = classModel.getDeclaredConstructor().newInstance();
+            GenericAPIModel<?> model = classModel.getDeclaredConstructor().newInstance();
             for(Method method : model.getClass().getMethods()){
                if(method.getName().startsWith("set")){
                //Getting all the fields that correspond to the JsonArray fields

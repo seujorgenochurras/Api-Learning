@@ -20,16 +20,19 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+
+
    public static void main(String[] args) throws InterruptedException, IOException {
-   for(int i = 1; i < 3; i++){
-      Thread.sleep(200000);
+
+   for(int i = 1; i < 4; i++){
       Marca.instances.clear();
       Modelo.instances.clear();
       ModeloAno.instances.clear();
       Veiculo.carro.clear();
+
       try {
       //Pegando marcas
-         ConsultarMarcas consultarMarcas = new ConsultarMarcas(i, 292);
+         ConsultarMarcas consultarMarcas = new ConsultarMarcas(i, 293);
          consultarMarcas.toModel(consultarMarcas.getResponse());
       //Separando Lista de todas as marcas de 23 partes iguais
       List<List<Marca>> marcasLists = ListUtils.divideList(Marca.instances, 16);
@@ -62,7 +65,7 @@ public class Main {
          anoModeloExecuter.shutdown();
       }
       //Separando Anos dos Modelos em 600 threads
-      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,600);
+      List<List<ModeloAno>> anoModeloList = ListUtils.divideList(ModeloAno.instances,700);
 
       //Encontrando todos os carros
       ExecutorService carroExectuer = Executors.newFixedThreadPool(anoModeloList.size());
@@ -117,5 +120,7 @@ public class Main {
          });
       System.out.println("Injection finished");
       }
+      Thread.sleep(300000);
+      System.out.println("acabou");
    }
 }

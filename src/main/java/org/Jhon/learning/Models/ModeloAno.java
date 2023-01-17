@@ -37,8 +37,9 @@ public class ModeloAno extends GenericModeloAnoModel implements IModel, SQLInser
       Class<? extends ModeloAno> instance = this.getClass();
       Method getModeloFK = instance.getMethod("getModeloID");
       Method getAno = instance.getMethod("getAno");
+      Method getGasID = instance.getMethod("getGasID");
 
-      return new Method[]{getAno, getModeloFK};
+      return new Method[]{getAno, getModeloFK, getGasID  };
    }
 
    @Override

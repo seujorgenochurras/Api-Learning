@@ -2,6 +2,7 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.*;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
+import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
 
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 //Esse é referência a interface AnoModeloRequest
 public abstract class GenericModeloAno<T extends AnoModeloRequest> extends GenericModelo<T> {
    private int modeloID;
+
    public int getModeloID() {
       return modeloID;
    }

@@ -1,8 +1,9 @@
-package org.Jhon.learning.Models.Structure;
+package org.Jhon.learning.ApiTesting;
 
 import com.google.gson.JsonPrimitive;
+import org.Jhon.learning.Models.Structure.IModel;
 
-public abstract class GenericAPIRequester<T extends IModel> {
+public abstract class GenericAPIModel<T extends IModel> {
    /**
     * name of the value
     * @see org.Jhon.learning.ApiTesting.Structures.GenericConsultarClass
