@@ -15,38 +15,30 @@ public class ConsultarAnoModelo extends GenericModeloAno<AnoModeloRequest> {
       return new AnoModeloRequest() {
          @Override
          public int getCodigoModelo() {
-            return getModeloID();
+            return getModelo().getID();
          }
 
          @Override
          public int getCodigoMarca() {
-            return ConsultarAnoModelo.super.getMarcaID();
+            return getMarcaObject().getID();
          }
 
          @Override
          public @Range(from = 1, to = 3)
          @NotNull Integer getCodigoTipoVeiculo() {
-            return ConsultarAnoModelo.super.getVehicleID();
+            return getMarcaObject().getVeiculoID();
          }
 
          @Override
          public Integer getCodigoTabelaReferencia() {
-            return ConsultarAnoModelo.super.getTabelaReferenciaID();
+            return getMarcaObject().getTabelaReferencialID();
          }
       };
    }
    public ConsultarAnoModelo(){}
-   public ConsultarAnoModelo(int codigoModelo, int codigoTipoVeiculo, int taberalReferencia, int codigoMarca){
-      setModeloID(codigoModelo);
-      setVehicleID(codigoTipoVeiculo);
-      setTabelaReferenciaID(taberalReferencia);
-      setMarcaID(codigoMarca);
-   }
    public ConsultarAnoModelo(Modelo modelo){
-      setModeloID(modelo.getModeloID());
-      setMarcaID(modelo.getMarcaID());
-      setTabelaReferenciaID(modelo.getTabelaReferencialID());
-      setVehicleID(modelo.getVeiculoID());
+     setModelo(modelo);
+     setMarcaObject(modelo.getMarcaObject());
    }
 
 }

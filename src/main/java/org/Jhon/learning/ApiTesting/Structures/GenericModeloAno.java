@@ -2,23 +2,23 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.*;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
+import org.Jhon.learning.Models.Marca;
+import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 //Esse é referência a interface AnoModeloRequest
 public abstract class GenericModeloAno<T extends AnoModeloRequest> extends GenericModelo<T> {
-   private int modeloID;
-   public int getModeloID() {
-      return modeloID;
+   private Modelo modelo;
+
+   public Modelo getModelo() {
+      return modelo;
    }
 
-   public void setModeloID(int modeloID) {
-      this.modeloID = modeloID;
+   public void setModelo(Modelo modelo) {
+      this.modelo = modelo;
    }
-
-
    @Override
    public void toModel(JsonElement jsonElement) {
       if(Objects.isNull(jsonElement)) throw new IllegalStateException("CANNOT SAVE NULL JSON");
@@ -28,7 +28,6 @@ public abstract class GenericModeloAno<T extends AnoModeloRequest> extends Gener
       //Creating an emulated response Json
       JsonArray emulatedJson = new JsonArray();
       JsonObject emulatedFields = new JsonObject();
-      AtomicBoolean s = new AtomicBoolean(false);
       jsonYears.forEach(field ->{
           //Transforming JsonField "Value" into the two needed values
           String[] valueFields = field.getAsJsonObject().get("Value").getAsString().split("-");
@@ -45,10 +44,8 @@ public abstract class GenericModeloAno<T extends AnoModeloRequest> extends Gener
    @Override
    protected void getAdditionalMethods(Object model) {
      ModeloAno modeloAno = (ModeloAno) model;
-      modeloAno.setModeloID(getModeloID());
-      modeloAno.setMarcaID(getMarcaID());
-      modeloAno.setVeiculoID(getVehicleID());
-      modeloAno.setTabelaReferencialID(getTabelaReferenciaID());
-      modeloAno.addToList();
+     modeloAno.setModeloObject(getModelo());
+     modeloAno.setMarcaObject(getMarcaObject());
+     modeloAno.addToList();
    }
 }

@@ -14,7 +14,7 @@ public interface VeiculoRequest extends AnoModeloRequest {
       return "tradicional";
    }
    int getCodigoTipoCombustivel();
-   String getAnoModelo();
+   int getAnoModelo();
 
    @Override
    default StringBuilder getURL() {

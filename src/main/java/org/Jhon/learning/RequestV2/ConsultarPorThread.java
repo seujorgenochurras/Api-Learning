@@ -17,17 +17,18 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
    /**
     * list that it will iterate and get its models
     * */
-   private List<? extends IModel> iterationList = new ArrayList<>();
+   private List<? extends IModel> modelsList = new ArrayList<>();
    private ClassModel classLevel;
    public List<? extends IModel> getIterationList() {
-      return iterationList;
+      return modelsList;
    }
 
    public  <H extends IModel> void setIterationList(List<H> iterationList) {
-      this.iterationList = iterationList;
+      this.modelsList = iterationList;
    }
 
    public <H extends IModel>ConsultarPorThread(List<H> listaDePesquisa){
+      //When you have like 30 elements on a list and try to divide it into 300 threads
       try {
          listaDePesquisa.get(0);
       }catch (IndexOutOfBoundsException e){
@@ -46,16 +47,17 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
 
    @Override
    public void run(){
-      System.out.println("*******Carregando " + iterationList.get(0).getClass().getSimpleName() + "*******");
+      System.out.println("*******Carregando " + modelsList.get(0).getClass().getSimpleName() + "*******");
       AtomicInteger tmp = new AtomicInteger();
-      iterationList.forEach(item ->{
+      
          Class<?> model = classLevel.classe;
-         Class<?>[] paramType = {item.getClass()};
+         Class<?>[] paramType = {modelsList.get(0).getClass()};
+      modelsList.forEach(item ->{
          try {
             //todo find what this warning means
            T instance = (T) model.getDeclaredConstructor(paramType).newInstance(item);
             instance.toModel(instance.getResponse());
-            System.out.println(tmp.getAndIncrement() + 1 + " de " + iterationList.size());
+            System.out.println(tmp.getAndIncrement() + 1 + " de " + modelsList.size());
          } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println("ERRO AO CARREGAR O " + classLevel.name() + " numero " + tmp.getAndIncrement());
             throw new RuntimeException(e);
@@ -64,9 +66,6 @@ public class ConsultarPorThread<T extends GenericConsultarClass<?>> extends Thre
          }
       });
    }
-
-
-
 
 
 

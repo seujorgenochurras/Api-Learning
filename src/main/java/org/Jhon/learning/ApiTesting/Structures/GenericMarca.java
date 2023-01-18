@@ -36,6 +36,7 @@ public abstract class GenericMarca<T extends MarcasRequest> extends GenericConsu
       Marca marca = (Marca) model;
       marca.setVeiculoID(getVehicleID());
       marca.setTabelaReferencialID(getTabelaReferenciaID());
+
       marca.addToList();
    }
 }

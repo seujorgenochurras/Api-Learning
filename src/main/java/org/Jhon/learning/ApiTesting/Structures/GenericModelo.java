@@ -2,18 +2,20 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.JsonElement;
 import org.Jhon.learning.ApiTesting.Structures.Request.ModeloRequest;
+import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 
 import java.util.Objects;
 
 public abstract class GenericModelo<T extends ModeloRequest> extends GenericMarca<T> {
-   private int marcaID;
+   private Marca marcaObject;
 
-   public int getMarcaID() {
-      return marcaID;
+   public Marca getMarcaObject() {
+      return marcaObject;
    }
-   public void setMarcaID(int marcaID) {
-      this.marcaID = marcaID;
+
+   public void setMarcaObject(Marca marcaObject) {
+      this.marcaObject = marcaObject;
    }
    @Override
    public void toModel(JsonElement jsonElement)throws IllegalStateException {
@@ -23,10 +25,8 @@ public abstract class GenericModelo<T extends ModeloRequest> extends GenericMarc
    @Override
    protected void getAdditionalMethods(Object model) {
      Modelo modelo = (Modelo) model;
-      modelo.setModeloID(modelo.getValue());
-      modelo.setVeiculoID(getVehicleID());
-      modelo.setTabelaReferencialID(getTabelaReferenciaID());
-      modelo.setMarcaID(getMarcaID());
+      //modelo.setModeloID(modelo.getID());
+      modelo.setMarcaObject(getMarcaObject());
       modelo.addToList();
    }
 }

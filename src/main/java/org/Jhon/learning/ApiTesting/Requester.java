@@ -43,7 +43,7 @@ public final class Requester<T extends Request> {
       //this code will try to calm things down and then try again
       while(connectResponse == 520 || connectResponse == 502){
 
-         Thread.sleep(1000);
+         Thread.sleep(10000);
          httpURLConnection = connection();
          connectResponse = httpURLConnection.getResponseCode();
       }

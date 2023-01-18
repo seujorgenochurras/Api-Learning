@@ -1,12 +1,11 @@
 package org.Jhon.learning.Models.Structure;
 
 import com.google.gson.JsonPrimitive;
+import org.Jhon.learning.ApiTesting.GenericAPIModel;
 import org.Jhon.learning.Models.Marca;
 
-public abstract class GenericMarcaModel extends GenericAPIRequester<Marca> {
+public abstract class GenericMarcaModel extends GenericAPIModel<Marca> {
    private int veiculoID;
-
-   private int marcaID;
 
    private int tabelaReferencialID;
 
@@ -23,9 +22,6 @@ public abstract class GenericMarcaModel extends GenericAPIRequester<Marca> {
    public void setVeiculoID(int veiculoID) {
       this.veiculoID = veiculoID;
    }
-   public void setMarcaID(int marcaID) {
-      this.marcaID = marcaID;
-   }
    public int getVeiculoID() {
       return veiculoID;
    }
@@ -34,13 +30,6 @@ public abstract class GenericMarcaModel extends GenericAPIRequester<Marca> {
    }
    public void setVeiculoID(byte veiculoID) {
       this.veiculoID = veiculoID;
-   }
-   public int getMarcaID() {
-      return marcaID;
-   }
-
-   public void setMarcaID(JsonPrimitive marcaID) {
-      this.marcaID = marcaID.getAsByte();
    }
 
 }

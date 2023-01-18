@@ -13,42 +13,39 @@ public class ConsultarVeiculo extends GenericVeiculoClass<VeiculoRequest> {
       return new VeiculoRequest() {
          @Override
          public int getCodigoTipoCombustivel() {
-            return getCombustivelID();
+            return getModeloAno().getValue(); //todo fix this
          }
 
          @Override
-         public String getAnoModelo() {
-            return getAnoModeloID();
+         public int getAnoModelo() {
+            return getModeloAno().getAno();
          }
 
          @Override
          public int getCodigoModelo() {
-            return getModeloID();
+            return getModeloAno().getID();
          }
 
          @Override
          public int getCodigoMarca() {
-            return getMarcaID();
+            return getMarcaObject().getID();
          }
 
          @Override
          public @Range(from = 1, to = 3) @NotNull Integer getCodigoTipoVeiculo() {
-            return getVehicleID();
+            return getMarcaObject().getVeiculoID();
          }
 
          @Override
          public Integer getCodigoTabelaReferencia() {
-            return getTabelaReferenciaID();
+            return getMarcaObject().getTabelaReferencialID();
          }
       };
    }
    public ConsultarVeiculo(){};
    public ConsultarVeiculo(ModeloAno modeloAno){
-      setAnoModeloID(modeloAno.getLabel());
-      setCombustivelID(modeloAno.getValue());
-      setTabelaReferenciaID(modeloAno.getTabelaReferencialID());
-      setModeloID(modeloAno.getModeloID());
-      setMarcaID(modeloAno.getMarcaID());
-      setVehicleID(modeloAno.getVeiculoID());
+          setModeloAno(modeloAno);
+          setModelo(modeloAno.getModeloObject());
+          setMarcaObject(modeloAno.getMarcaObject());
    }
 }

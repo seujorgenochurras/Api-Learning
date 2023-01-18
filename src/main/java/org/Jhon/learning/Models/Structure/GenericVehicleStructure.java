@@ -1,49 +1,38 @@
 package org.Jhon.learning.Models.Structure;
 
 import com.google.gson.JsonPrimitive;
+import org.Jhon.learning.ApiTesting.GenericAPIModel;
+import org.Jhon.learning.Models.Marca;
+import org.Jhon.learning.Models.Modelo;
+import org.Jhon.learning.Models.ModeloAno;
 import org.Jhon.learning.Models.Veiculo;
 
-import java.time.Year;
-
-public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
+public abstract class GenericVehicleStructure extends GenericAPIModel<Veiculo> {
    private String codigoFipe;
-   private String marca;
-   private String modelo;
-   private int anoModelo;
-   private String combustivel;
-   private String siglaCombustivel;
    private String autenticacao;
    private String dataConsulta;
    private String valor;
    private String mesReferencia;
-   private int tipoVeiculo;
+   private ModeloAno modeloAnoObject;
 
-   @Override
-   public String getName(){
-      return getMarca() + " "+ getModelo();
+   ModeloAno getModeloAnoObject() {
+      return modeloAnoObject;
    }
 
-   public String getSiglaCombustivel() {
-      return siglaCombustivel;
+   public void setModeloAnoObject(ModeloAno modeloAnoObject) {
+      this.modeloAnoObject = modeloAnoObject;
+   }
+   public String getVeiculoTipoNome(){
+      return CarTypes.getByValue(getMarcaObject().getVeiculoID()).name();
    }
 
-   public void setSiglaCombustivel(JsonPrimitive siglaCombustivel) {
-         this.siglaCombustivel = siglaCombustivel.getAsJsonPrimitive().getAsString();
-  }
-  public void setSiglaCombustivel(String siglaCombustivel) {
-         this.siglaCombustivel = siglaCombustivel;
-  }
-
-   public int getTipoVeiculo() {
-      return tipoVeiculo;
+   public Marca getMarcaObject(){
+      return getModeloObject().getMarcaObject();
+   }
+   public Modelo getModeloObject(){
+      return getModeloAnoObject().getModeloObject();
    }
 
-   public void setTipoVeiculo(JsonPrimitive tipoVeiculo) {
-         this.tipoVeiculo = tipoVeiculo.getAsInt();
-   }
-   public void setTipoVeiculo(int tipoVeiculo) {
-         this.tipoVeiculo = tipoVeiculo;
-   }
 
    public String getMesReferencia() {
       return mesReferencia;
@@ -67,50 +56,9 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
       this.codigoFipe = codigoFipe;
    }
 
-   public String getMarca() {
-      return marca;
+   public String getCombustivelName() {
+      return getModeloAnoObject().getCombustivel().name();
    }
-
-   public void setMarca(JsonPrimitive marca) {
-      this.marca = marca.getAsString();
-   }
-   public void setMarca(String marca) {
-      this.marca = marca;
-   }
-
-   public String getModelo() {
-      return modelo;
-   }
-
-   public void setModelo(JsonPrimitive modelo) {
-      this.modelo = modelo.getAsString();
-   }
-   public void setModelo(String modelo) {
-      this.modelo = modelo;
-   }
-
-   public int getAnoModelo() {
-      return anoModelo;
-   }
-
-   public void setAnoModelo(JsonPrimitive anoModelo) {
-      this.anoModelo = anoModelo.getAsInt();
-   }
-   public void setAnoModelo(int anoModelo) {
-      this.anoModelo = anoModelo;
-   }
-
-   public String getCombustivel() {
-      return combustivel;
-   }
-
-   public void setCombustivel(JsonPrimitive combustivel) {
-      this.combustivel = combustivel.getAsString();
-   }
-   public void setCombustivel(String combustivel) {
-      this.combustivel = combustivel;
-   }
-
    public String getAutenticacao() {
       return autenticacao;
    }
@@ -135,7 +83,7 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
 
    /**
     * @return Raw price of the vehicle, containing monetary symbol
-    * @see Veiculo#getNumberPrice()
+    * @see Veiculo#getPreco()
     * */
    public String getValor() {
       return valor;
@@ -147,4 +95,25 @@ public abstract class GenericVehicleStructure extends GenericModeloAnoModel {
    public void setValor(String valor) {
       this.valor = valor;
    }
+
+   public char getSiglaCombustivel(){
+      return getModeloAnoObject().getCombustivel().symbol;
+   }
+
+   public String getModeloNome(){
+      return getModeloObject().getModelName();
+   }
+   public String getMarcaNome(){
+      return getMarcaObject().getModelName();
+   }
+
+   public int getAno(){
+      return getModeloAnoObject().getAno();
+   }
+
+@Override
+   public String getModelName(){
+      return getMarcaObject().getModelName() + " "+ getModeloAnoObject().getModeloObject().getModelName();
+}
+
 }
