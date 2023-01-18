@@ -113,7 +113,7 @@ public abstract class GenericVehicleStructure extends GenericAPIModel<Veiculo> {
 
 @Override
    public String getModelName(){
-      return getMarcaObject().getModelName() + " "+ getModeloAnoObject().getModeloObject().getModelName();
+      return getMarcaObject().getModelName() + " "+ getModeloObject().getModelName();
 }
 
 }
