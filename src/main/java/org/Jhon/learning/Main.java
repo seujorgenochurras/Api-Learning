@@ -21,14 +21,14 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-
    public static void main(String[] args) throws InterruptedException, IOException {
-      for (int h = 37; h < 294; h++) {
+      for (int h = 47; h < 294; h++) {
          for (int i = 1; i < 4; i++) {
             Marca.instances.clear();
             Modelo.instances.clear();
             ModeloAno.instances.clear();
             Veiculo.carro.clear();
+            Veiculo veiculo = new Veiculo();
 
             try {
                //Pegando marcas
