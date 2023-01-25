@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Range;
 
 
 public class ConsultarVeiculo extends GenericVeiculoClass<VeiculoRequest> {
+
    @Override
    public VeiculoRequest getStructure() {
       return new VeiculoRequest() {
@@ -23,7 +24,7 @@ public class ConsultarVeiculo extends GenericVeiculoClass<VeiculoRequest> {
 
          @Override
          public int getCodigoModelo() {
-            return getModeloAno().getID();
+            return getModeloObject().getID();
          }
 
          @Override
@@ -45,7 +46,5 @@ public class ConsultarVeiculo extends GenericVeiculoClass<VeiculoRequest> {
    public ConsultarVeiculo(){};
    public ConsultarVeiculo(ModeloAno modeloAno){
           setModeloAno(modeloAno);
-          setModelo(modeloAno.getModeloObject());
-          setMarcaObject(modeloAno.getMarcaObject());
    }
 }

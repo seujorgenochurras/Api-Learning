@@ -15,7 +15,7 @@ public class ConsultarAnoModelo extends GenericModeloAno<AnoModeloRequest> {
       return new AnoModeloRequest() {
          @Override
          public int getCodigoModelo() {
-            return getModelo().getID();
+            return getModeloObject().getID();
          }
 
          @Override
