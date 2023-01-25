@@ -29,7 +29,13 @@ public abstract class GenericMarca<T extends MarcasRequest> extends GenericConsu
    @Override
    public void toModel(JsonElement jsonElement)throws IllegalStateException {
       if (Objects.isNull(jsonElement)) throw new IllegalStateException("JSON CANNOT BE NULL");
+      try {
+
       parseToModel(jsonElement.getAsJsonArray(), Marca.class);
+      }catch (IllegalStateException e){
+         System.out.println("damn it, something went completely wrong .-.");
+         System.out.println(e.getMessage());
+      }
    }
    @Override
    protected void getAdditionalMethods(Object model) {

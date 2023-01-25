@@ -2,7 +2,6 @@ package org.Jhon.learning.ApiTesting.Structures;
 
 import com.google.gson.*;
 import org.Jhon.learning.ApiTesting.Structures.Request.AnoModeloRequest;
-import org.Jhon.learning.Models.Marca;
 import org.Jhon.learning.Models.Modelo;
 import org.Jhon.learning.Models.ModeloAno;
 
@@ -12,7 +11,7 @@ import java.util.Objects;
 public abstract class GenericModeloAno<T extends AnoModeloRequest> extends GenericModelo<T> {
    private Modelo modelo;
 
-   public Modelo getModelo() {
+   public Modelo getModeloObject() {
       return modelo;
    }
 
@@ -44,7 +43,7 @@ public abstract class GenericModeloAno<T extends AnoModeloRequest> extends Gener
    @Override
    protected void getAdditionalMethods(Object model) {
      ModeloAno modeloAno = (ModeloAno) model;
-     modeloAno.setModeloObject(getModelo());
+     modeloAno.setModeloObject(getModeloObject());
      modeloAno.setMarcaObject(getMarcaObject());
      modeloAno.addToList();
    }
