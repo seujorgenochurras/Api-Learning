@@ -13,6 +13,7 @@ public class ListUtils {
     * @param partitions number of partitions that you want the list to have
     * */
    public static <T> List<List<T>> divideList(List<T> list, int partitions) {
+      if(partitions > list.size()) throw new IllegalArgumentException("Cannot divide the list size : " + list.size() + " with partitions: " + partitions );
       //Dividing partitions
       int elementsPerPartition = list.size() / partitions;
 

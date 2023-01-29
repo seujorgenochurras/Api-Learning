@@ -7,10 +7,8 @@ import java.lang.reflect.Method;
 
 public interface SQLInsert {
    /**
-    * put the full sql insert command here, it should cointain all the methods that compose a model
-    *
+    * put the full sql insert command here, it should contain all the methods that compose a model
     * */
-
    Method[] getMethods() throws NoSuchMethodException;
    String getTableName();
   default String getInsertCommand() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {

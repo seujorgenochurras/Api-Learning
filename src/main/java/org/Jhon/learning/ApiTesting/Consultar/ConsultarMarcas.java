@@ -6,8 +6,6 @@ import org.Jhon.learning.Models.Structure.CarTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-
-
 public class ConsultarMarcas extends GenericMarca<MarcasRequest> {
    public ConsultarMarcas(int vehicleID, int tabelaReferenciaID) {
       setVehicleID(vehicleID);

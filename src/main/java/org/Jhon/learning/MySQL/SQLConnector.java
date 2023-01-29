@@ -22,7 +22,6 @@ public class SQLConnector{
    private Connection connection;
    /**
     * This needs the {@code Dotenv} Database information
-    *
     * */
    public void createSQLConnection(){
    Connection connection;
